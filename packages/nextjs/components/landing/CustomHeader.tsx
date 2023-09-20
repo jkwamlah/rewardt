@@ -48,15 +48,8 @@ const CustomHeader: React.FC = () => {
                     <div id="navigation">
                         <ul className="navigation-menu">
                             <li><a href="/" className="sub-menu-item">Home</a></li>
-                            <li><a href="index.html" className="sub-menu-item">Features</a></li>
-                            <li className="has-submenu parent-parent-menu-item">
-                                <a href="">Docs</a><span className="menu-arrow"></span>
-                                <ul className="submenu">
-                                    <li><a href="documentation.html" className="sub-menu-item">Documentation</a></li>
-                                    <li><a href="changelog.html" className="sub-menu-item">Changelog</a></li>
-                                    <li><a href="widget.html" className="sub-menu-item">Widget</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="#" className="sub-menu-item">Features</a></li>
+                            <li><a href="#" className="sub-menu-item">How It Works</a></li>
                         </ul>
                     </div>
                 </div>

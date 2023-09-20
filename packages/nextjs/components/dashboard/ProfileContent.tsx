@@ -1,101 +1,111 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import CourseList from "~~/components/dashboard/CourseList";
-import ClassList from "~~/components/dashboard/ClassList";
+import ProgramList from "~~/components/dashboard/ProgramList";
 import CourseRewardList from "~~/components/dashboard/CourseRewardList";
+import CourseCreate from "~~/components/dashboard/CourseCreate";
+import ProgramCreate from "~~/components/dashboard/ProgramCreate";
+import feather from "feather-icons";
+import TaskCreate from "~~/components/dashboard/TaskCreate";
+import TokenList from "~~/components/dashboard/TokenList";
+import ProgramDetail from "~~/components/dashboard/ProgramDetail";
 
 const ProfileContent: React.FC = () => {
-    const assets = [{
-        image: 'https://picsum.photos/200/200',
-        title: 'Design your apps in your own way',
-        likes: 33,
-        comments: 8,
-        description: 'What a beautiful Nefti. Design it your own way'
-    }, {
-        image: 'https://picsum.photos/200/200',
-        title: 'How apps are changing the IT world',
-        likes: 83,
-        comments: 75,
-        description: 'What a beautiful Nefti. Design it your own way'
-    }];
+    useEffect(() => {
+        feather.replace()
+    }, []);
 
-    const classes = [
+    const initialPrograms = [
         {
-            title: 'August 2023 Web3 Bootcamp',
-            tokens: 5000
+            id: 1,
+            name: 'July 2023 ABSA Web3 Bootcamp',
+            description: 'A web3 bootcamp organized by ABSA and designed for young ones to develop innovative web3 solutions.',
+            status: 'completed'
         },
         {
-            title: 'October 2023 Incubator Program',
-            tokens: 20000
+            id: 2,
+            name: 'August 2023 Web3 Bootcamp',
+            description: 'An interactive web3 bootcamp designed for young ones to explore, learn and develop innovative solutions.',
+            status: 'ongoing',
+            students: ['0xF9e8D729c2724437209cDB24826b2a056B9fe84F', '0xF9e8D729c2724437209cDB24826b2a056B9fe84F', '0xF9e8D729c2724437209cDB24826b2a056B9fe84F']
         },
         {
-            title: '2023 Accelerator Program',
-            tokens: 10000
+            id: 3,
+            name: 'October 2023 Incubator Program',
+            description: 'A Mastercard sponsored program designed for young entrepreneurs to grow their ideas in solving problems in Africa.',
+            status: 'draft',
+            students: ['0xF9e8D729c2724437209cDB24826b2a056B9fe84F', '0xF9e8D729c2724437209cDB24826b2a056B9fe84F', '0xF9e8D729c2724437209cDB24826b2a056B9fe84F']
+        },
+        {
+            id: 4,
+            name: 'November 2023 Accelerator Program',
+            description: 'A MEST sponsored accelerator program designed for budding businesses to grow and flourish in Ghana.',
+            status: 'draft',
+            students: ['0xF9e8D729c2724437209cDB24826b2a056B9fe84F', '0xF9e8D729c2724437209cDB24826b2a056B9fe84F', '0xF9e8D729c2724437209cDB24826b2a056B9fe84F']
         },
     ];
 
-    const courses = [
-        {
-            image: 'assets/images/course/1.jpg',
-            teacherImage: 'assets/images/client/01.jpg',
-            teacherName: 'Dung Lewis',
-            teacherProfession: 'Professor',
-            fee: 11,
-            category: 'Design',
-            title: 'Principles of Good Design',
-            description:
-                'The most well-known dummy text is the have originated in the 16th century.',
-            rewards: 25,
-            duration: '1h 30m',
-            students: 3012,
-        },
-        {
-            image: 'assets/images/course/3.jpg',
-            teacherImage: 'assets/images/client/01.jpg',
-            teacherName: 'Dung Lewis',
-            teacherProfession: 'Professor',
-            fee: 11,
-            category: 'Development',
-            title: 'Access to Higher Education',
-            description:
-                'The most well-known dummy text is the have originated in the 16th century.',
-            rewards: 25,
-            duration: '1h 30m',
-            students: 3012,
-        },
-        {
-            image: 'assets/images/course/2.jpg',
-            teacherImage: 'assets/images/client/01.jpg',
-            teacherName: 'Dung Lewis',
-            teacherProfession: 'Professor',
-            fee: 11,
-            category: 'Software',
-            title: 'Web 3.0 Development',
-            description:
-                'The most well-known dummy text is the have originated in the 16th century.',
-            rewards: 25,
-            duration: '1h 30m',
-            students: 3012,
-        },
-        {
-            image: 'assets/images/course/4.jpg',
-            teacherImage: 'assets/images/client/01.jpg',
-            teacherName: 'Dung Lewis',
-            teacherProfession: 'Professor',
-            fee: 11,
-            category: 'Music',
-            title: 'Introduction to Song Writing',
-            description:
-                'The most well-known dummy text is the have originated in the 16th century.',
-            rewards: 25,
-            duration: '1h 30m',
-            students: 3012,
-        },
-    ];
+    const subMenus = [
+        {name: 'programs', icon: 'uil-books'},
+        {name: 'students', icon: 'uil-users-alt'},
+        {name: 'tokens', icon: 'uil-transaction'},
+        {name: 'courses', icon: 'uil-transaction'},
+    ]
+    const taskTypes = [
+        {id: 1, name: 'assignment'},
+        {id: 2, name: 'participation'},
+        {id: 3, name: 'project'},
+        {id: 4, name: 'behaviour'},
+        {id: 5, name: 'stipend'},
+    ]
 
-    const [subMenu, setSubMenu] = useState('classes');
+    const students = [
+        {id: 1, address: '0xF7e8D729c2724437209cDB24826b2a056B9fe84F', tokens: 800},
+        {id: 2, address: '0xe9aaD729c2724437209cDB24826b2a056B9fe84F', tokens: 200},
+        {id: 3, address: '0xd78e8D729c2724437200cDB24826b2a056B9fe84F', tokens: 900},
+        {id: 4, address: '0x099e8D729c2724437209cDB24826b2a056B9fe84F', tokens: 0},
+        {id: 3, address: '0xc78e8D729c2724437200cDB24826b2a056B9fe84F', tokens: 900},
+        {id: 4, address: '0xad9e8D729c2724437209cDB24826b2a056B9fe84F', tokens: 0},
+        {id: 5, address: '0xea6e8D729c2724437209cDB24826b2a056B9fe84F', tokens: 800},
+    ]
+
+    const [subMenu, setSubMenu] = useState('programs');
+    const [programs, setPrograms] = useState(initialPrograms);
+    const [activeProgram, setActiveProgram] = useState({
+        id: 0,
+        name: '',
+        description: '',
+        status: ''
+    });
+
     const handleSubMenuClicked = (pageName: string) => {
-        console.log('pageName', pageName)
         setSubMenu(pageName);
+    }
+
+    const handleProgramClicked = (programId: number) => {
+        const program = programs.find((p) => p.id === programId);
+
+        if (program) {
+            setActiveProgram({
+                id: program.id,
+                name: program.name,
+                description: program.description,
+                status: program.status
+            });
+        } else {
+            setActiveProgram({
+                id: 0,
+                name: '',
+                description: '',
+                status: ''
+            });
+        }
+        setSubMenu('show program')
+    }
+    const handleProgramsFilter = (filter: string) => {
+        if (filter === 'all') return setPrograms(initialPrograms)
+
+        const filteredPrograms = initialPrograms.filter(item => item.status === filter);
+        return setPrograms(filteredPrograms);
     }
 
     return (
@@ -122,67 +132,82 @@ const ProfileContent: React.FC = () => {
 
                             <div className="widget mt-4">
                                 <ul className="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
-                                    <li className="navbar-item account-menu px-0">
-                                        <a onClick={e => {
-                                            e.preventDefault()
-                                            handleSubMenuClicked('classes')
-                                        }} href="#"
-                                           className="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                                            <span className="h4 mb-0"><i className="uil uil-transaction"/></span>
-                                            <h6 className="mb-0 ms-2">Classes</h6>
-                                        </a>
-                                    </li>
-
-                                    <li className="navbar-item account-menu px-0 mt-2">
-                                        <a onClick={e => {
-                                            e.preventDefault()
-                                            handleSubMenuClicked('courses')
-                                        }} href="#"
-                                           className="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                                            <span className="h4 mb-0"><i className="uil uil-users-alt"/></span>
-                                            <h6 className="mb-0 ms-2">Courses</h6>
-                                        </a>
-                                    </li>
-
-                                    <li className="navbar-item account-menu px-0 mt-2">
-                                        <a onClick={e => {
-                                            e.preventDefault()
-                                            handleSubMenuClicked('settings')
-                                        }} href="#"
-                                           className="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                                            <span className="h4 mb-0"><i className="uil uil-setting"/></span>
-                                            <h6 className="mb-0 ms-2">Settings</h6>
-                                        </a>
-                                    </li>
+                                    {subMenus.map((menu, index) => (
+                                        <li
+                                            key={index}
+                                            className={`navbar-item account-menu px-0 ${(subMenu === menu.name) ? 'active' : ''}`}
+                                        >
+                                            <a
+                                                onClick={e => {
+                                                    e.preventDefault();
+                                                    handleSubMenuClicked(menu.name);
+                                                }}
+                                                href="#"
+                                                className="navbar-link d-flex rounded shadow align-items-center py-2 px-4"
+                                            >
+                                                <span className="h4 mb-0"><i className={`uil ${menu.icon}`}/></span>
+                                                <h6 className="mb-0 ms-2 text-capitalize">{menu.name}</h6>
+                                            </a>
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
                         </div>
                     </div>
 
-
                     <div className="col-lg-8 col-12">
                         <div className="border-bottom pb-2 d-flex justify-content-between align-items-center">
                             <h5 className="text-capitalize">{subMenu}</h5>
 
+                            {subMenu === 'programs' && (<button
+                                onClick={() => handleSubMenuClicked('create program')}
+                                className="btn btn-outline-primary text-capitalize">
+                                add program
+                            </button>)}
+
                             {subMenu === 'courses' && (<button
-                                onClick={() => handleSubMenuClicked('course')}
+                                onClick={() => handleSubMenuClicked('create course')}
                                 className="btn btn-outline-primary text-capitalize">
                                 add course
                             </button>)}
 
-                            {subMenu === 'classes' && (<button
-                                onClick={() => handleSubMenuClicked('class')}
+                            {subMenu === 'rewards' && (<button
+                                onClick={() => handleSubMenuClicked('create reward')}
                                 className="btn btn-outline-primary text-capitalize">
-                                add class
+                                add reward
                             </button>)}
+
+                            {subMenu === 'students' && (
+                                <div className="d-flex justify-content-center pt-2">
+                                    <div className="col-lg-12 col-md-10">
+                                        <div className="subcribe-form">
+                                            <form className="ms-0">
+                                                <input type="text" id="search" name="search"
+                                                       className="rounded-pill border" placeholder="Search..."
+                                                       style={{height: '40px'}}/>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>)}
                         </div>
 
                         <div className="row">
-                            {subMenu === 'classes' && (<ClassList classes={classes}/>)}
-                            {subMenu === 'courses' && (<CourseList courses={courses}/>)}
-                            {subMenu === 'rewards' && (
-                                <CourseRewardList rewards={courses} updateSubMenu={handleSubMenuClicked}/>
-                            )}
+                            <div className="col-lg-12">
+                                <div className="sidebar sticky-bar p-4 rounded shadow">
+                                    {subMenu === 'programs' && (
+                                        <ProgramList programs={programs} programClicked={handleProgramClicked} handleFilter={handleProgramsFilter}/>)
+                                    }
+                                    {subMenu === 'rewards' && (<CourseRewardList rewards={[]}/>)}
+                                    {subMenu === 'tokens' && (<TokenList tokens={[]}/>)}
+
+                                    {subMenu === 'create program' && (<ProgramCreate/>)}
+                                    {subMenu === 'create course' && (<CourseCreate/>)}
+                                    {subMenu === 'create reward' && (<TaskCreate rewardTypes={taskTypes}/>)}
+
+                                    {subMenu === 'show program' && (<ProgramDetail
+                                        students={students} taskTypes={taskTypes} program={activeProgram}/>)}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -17,10 +17,9 @@ interface Reward {
 
 interface CourseRewardListProps {
     rewards: Reward[],
-    updateSubMenu: any
 }
 
-const CourseRewardList = ({rewards, updateSubMenu}: CourseRewardListProps) => {
+const CourseRewardList = ({rewards}: CourseRewardListProps) => {
     if (!rewards.length) return <NoContentAvailable/>
 
     return (
@@ -31,10 +30,7 @@ const CourseRewardList = ({rewards, updateSubMenu}: CourseRewardListProps) => {
                         <div className="position-relative">
                             <img src={reward.image} className="card-img-top" alt="..."/>
                             <div className="overlay"/>
-                            <button onClick={event => {
-                                event.preventDefault()
-                                updateSubMenu('rewards')
-                            }} className="btn btn-primary h6 preview bottom-0 end-0 me-4 mb-3">
+                            <button className="btn btn-primary h6 preview bottom-0 end-0 me-4 mb-3">
                                 Rewards <i className="uil uil-angle-right-b align-middle"/>
                             </button>
                         </div>
