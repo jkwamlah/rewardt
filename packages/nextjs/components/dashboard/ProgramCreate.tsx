@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import feather from 'feather-icons';
 import {useScaffoldContract, useScaffoldContractWrite} from "~~/hooks/scaffold-eth";
-import { useAccount } from "wagmi";
+import {useAccount} from "wagmi";
 
 interface ProgramCreateProps {
     resourceCreated: (type: string, blockHash: string) => void;
@@ -33,27 +33,13 @@ const ProgramCreate: React.FC<ProgramCreateProps> = (resourceCreated) => {
         contractName: "ClassReward",
     });
 
-// Returns the greeting and can be called in any function, unlike useScaffoldContractRead
-    await classReward?.read.greeting();
-
-// Used to write to a contract and can be called in any function
-
-    const {data: walletClient} = useWalletClient();
-    const {data: yourContract} = useScaffoldContract({
-        contractName: "YourContract",
-        walletClient,
-    });
-    const setGreeting = async () => {
-        // Call the method in any function
-        await yourContract?.write.setGreeting(["the greeting here"]);
-    };
-
     const {writeAsync} = useScaffoldContractWrite({
         contractName: "ClassReward",
         functionName: "createProgram",
         args: [formData.externalId, formData.name, formData.description],
         onBlockConfirmation: (txnReceipt) => {
             console.log("Transaction blockHash", txnReceipt.blockHash);
+            setAlertMessage(`Program Created with blockHash ${txnReceipt.blockHash}`)
         },
         onError: (error) => {
             console.log('error', error)
@@ -69,14 +55,6 @@ const ProgramCreate: React.FC<ProgramCreateProps> = (resourceCreated) => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        try {
-            console.log('Form data submitted:', formData);
-            const tx = await classReward?.connect(account.address).createProgram(formData);
-            console.log("Transaction successful:", tx);
-        } catch (error) {
-            console.error("Error:", error);
-        }
     };
 
     return (
@@ -90,7 +68,7 @@ const ProgramCreate: React.FC<ProgramCreateProps> = (resourceCreated) => {
 
             <div className="card border-0 rounded shadow">
                 <div className="card-body">
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={() => writeAsync}>
                         <div className="row mt-4">
                             <div className="col-lg-12">
                                 <div className="mb-3">
