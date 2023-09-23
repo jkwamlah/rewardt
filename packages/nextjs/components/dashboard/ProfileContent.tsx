@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import CourseList from "~~/components/dashboard/CourseList";
 import ProgramList from "~~/components/dashboard/ProgramList";
 import CourseRewardList from "~~/components/dashboard/CourseRewardList";
 import CourseCreate from "~~/components/dashboard/CourseCreate";
@@ -8,11 +7,14 @@ import feather from "feather-icons";
 import TaskCreate from "~~/components/dashboard/TaskCreate";
 import TokenList from "~~/components/dashboard/TokenList";
 import ProgramDetail from "~~/components/dashboard/ProgramDetail";
+import ProgramJoin from "~~/components/dashboard/ProgramJoin";
 
 const ProfileContent: React.FC = () => {
     useEffect(() => {
         feather.replace()
     }, []);
+
+
 
     const initialPrograms = [
         {
@@ -41,15 +43,17 @@ const ProfileContent: React.FC = () => {
             description: 'A MEST sponsored accelerator program designed for budding businesses to grow and flourish in Ghana.',
             status: 'draft',
             students: ['0xF9e8D729c2724437209cDB24826b2a056B9fe84F', '0xF9e8D729c2724437209cDB24826b2a056B9fe84F', '0xF9e8D729c2724437209cDB24826b2a056B9fe84F']
-        },
+        }
     ];
 
-    const subMenus = [
+    const [subMenus, setSubMenus] = useState([
         {name: 'programs', icon: 'uil-books'},
-        {name: 'students', icon: 'uil-users-alt'},
         {name: 'tokens', icon: 'uil-transaction'},
-        {name: 'courses', icon: 'uil-transaction'},
-    ]
+        {name: 'redeem', icon: 'uil-transaction'},
+    ]);
+
+    // const [initialPrograms, setInitialPrograms] = useState([]);
+
     const taskTypes = [
         {id: 1, name: 'assignment'},
         {id: 2, name: 'participation'},
@@ -59,13 +63,13 @@ const ProfileContent: React.FC = () => {
     ]
 
     const students = [
-        {id: 1, address: '0xF7e8D729c2724437209cDB24826b2a056B9fe84F', tokens: 800},
-        {id: 2, address: '0xe9aaD729c2724437209cDB24826b2a056B9fe84F', tokens: 200},
-        {id: 3, address: '0xd78e8D729c2724437200cDB24826b2a056B9fe84F', tokens: 900},
-        {id: 4, address: '0x099e8D729c2724437209cDB24826b2a056B9fe84F', tokens: 0},
-        {id: 3, address: '0xc78e8D729c2724437200cDB24826b2a056B9fe84F', tokens: 900},
-        {id: 4, address: '0xad9e8D729c2724437209cDB24826b2a056B9fe84F', tokens: 0},
-        {id: 5, address: '0xea6e8D729c2724437209cDB24826b2a056B9fe84F', tokens: 800},
+        {id: 1, name: 'ben oduro', address: '0xF7e8D729c2724437209cDB24826b2a056B9fe84F', tokens: 800},
+        {id: 2, name: 'kwami sefa', address: '0xe9aaD729c2724437209cDB24826b2a056B9fe84F', tokens: 200},
+        {id: 3, name: 'angel yaw', address: '0xd78e8D729c2724437200cDB24826b2a056B9fe84F', tokens: 900},
+        {id: 4, name: 'princess tyra', address: '0x099e8D729c2724437209cDB24826b2a056B9fe84F', tokens: 0},
+        {id: 3, name: 'wendy shay', address: '0xc78e8D729c2724437200cDB24826b2a056B9fe84F', tokens: 900},
+        {id: 4, name: 'gina fino', address: '0xad9e8D729c2724437209cDB24826b2a056B9fe84F', tokens: 0},
+        {id: 5, name: 'baba raman', address: '0xea6e8D729c2724437209cDB24826b2a056B9fe84F', tokens: 800},
     ]
 
     const [subMenu, setSubMenu] = useState('programs');
@@ -107,6 +111,11 @@ const ProfileContent: React.FC = () => {
         const filteredPrograms = initialPrograms.filter(item => item.status === filter);
         return setPrograms(filteredPrograms);
     }
+
+    const handleResourceCreated = (type: string, blockHash: string) => {
+        console.log(type)
+        console.log(blockHash)
+    };
 
     return (
         <section className="section mt-60">
@@ -159,22 +168,23 @@ const ProfileContent: React.FC = () => {
                         <div className="border-bottom pb-2 d-flex justify-content-between align-items-center">
                             <h5 className="text-capitalize">{subMenu}</h5>
 
-                            {subMenu === 'programs' && (<button
-                                onClick={() => handleSubMenuClicked('create program')}
-                                className="btn btn-outline-primary text-capitalize">
-                                add program
-                            </button>)}
+                            {subMenu === 'programs' && (<div className="d-flex justify-content-center pt-2">
+                                <button onClick={() => handleSubMenuClicked('join program')}
+                                        className="btn btn-primary text-capitalize mx-2">
+                                    join program
+                                </button>
+
+                                <button
+                                    onClick={() => handleSubMenuClicked('create program')}
+                                    className="btn btn-outline-primary text-capitalize">
+                                    add program
+                                </button>
+                            </div>)}
 
                             {subMenu === 'courses' && (<button
                                 onClick={() => handleSubMenuClicked('create course')}
                                 className="btn btn-outline-primary text-capitalize">
                                 add course
-                            </button>)}
-
-                            {subMenu === 'rewards' && (<button
-                                onClick={() => handleSubMenuClicked('create reward')}
-                                className="btn btn-outline-primary text-capitalize">
-                                add reward
                             </button>)}
 
                             {subMenu === 'students' && (
@@ -195,12 +205,16 @@ const ProfileContent: React.FC = () => {
                             <div className="col-lg-12">
                                 <div className="sidebar sticky-bar p-4 rounded shadow">
                                     {subMenu === 'programs' && (
-                                        <ProgramList programs={programs} programClicked={handleProgramClicked} handleFilter={handleProgramsFilter}/>)
+                                        <ProgramList programs={programs} programClicked={handleProgramClicked}
+                                                     handleFilter={handleProgramsFilter}/>)
                                     }
                                     {subMenu === 'rewards' && (<CourseRewardList rewards={[]}/>)}
                                     {subMenu === 'tokens' && (<TokenList tokens={[]}/>)}
 
-                                    {subMenu === 'create program' && (<ProgramCreate/>)}
+                                    {subMenu === 'create program' && (
+                                        <ProgramCreate resourceCreated={handleResourceCreated}/>)}
+                                    {subMenu === 'join program' && (
+                                        <ProgramJoin resourceCreated={handleResourceCreated}/>)}
                                     {subMenu === 'create course' && (<CourseCreate/>)}
                                     {subMenu === 'create reward' && (<TaskCreate rewardTypes={taskTypes}/>)}
 

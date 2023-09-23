@@ -37,6 +37,10 @@ export const RainbowKitCustomConnectButton = () => {
     // }, []);
 
     return (
+        // <div className="mt-2">
+        //     <ConnectButton />
+        // </div>
+
         <ConnectButton.Custom>
             {({account, chain, openAccountModal, openConnectModal, mounted}) => {
                 const connected = mounted && account && chain;
@@ -47,7 +51,7 @@ export const RainbowKitCustomConnectButton = () => {
                             if (!connected) {
                                 return (
                                     <button className="btn btn-primary" onClick={openConnectModal} type="button">
-                                        Connect Wallet
+                                        Login
                                     </button>
                                 );
                             }

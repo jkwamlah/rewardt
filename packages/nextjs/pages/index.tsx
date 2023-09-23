@@ -1,7 +1,6 @@
 import type {NextPage} from "next";
 import {MetaHeader} from "~~/components/MetaHeader";
 import HomeSection from "~~/components/landing/Home";
-import CustomHeader from "~~/components/landing/CustomHeader";
 import Layout from "~~/components/Layout";
 
 const Home: NextPage = () => {

@@ -14,7 +14,7 @@ interface Program {
 interface Student {
     id: number;
     address: string;
-    tokens: number;
+    name: string;
 }
 
 interface TaskType {

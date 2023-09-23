@@ -1,11 +1,11 @@
 const contracts = {
-  31337: [
+  80001: [
     {
-      chainId: "31337",
-      name: "localhost",
+      chainId: "80001",
+      name: "polygonMumbai",
       contracts: {
         ClassReward: {
-          address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+          address: "0x7048f1B9eAF9999B3ed6491AfDEa21D56883ABC1",
           abi: [
             {
               inputs: [],
@@ -49,6 +49,12 @@ const contracts = {
                 {
                   indexed: false,
                   internalType: "string",
+                  name: "externalId",
+                  type: "string",
+                },
+                {
+                  indexed: false,
+                  internalType: "string",
                   name: "name",
                   type: "string",
                 },
@@ -71,32 +77,10 @@ const contracts = {
                   type: "uint256",
                 },
                 {
-                  components: [
-                    {
-                      internalType: "uint256",
-                      name: "id",
-                      type: "uint256",
-                    },
-                    {
-                      internalType: "string",
-                      name: "name",
-                      type: "string",
-                    },
-                    {
-                      internalType: "string",
-                      name: "criteria",
-                      type: "string",
-                    },
-                    {
-                      internalType: "uint256",
-                      name: "timestamp",
-                      type: "uint256",
-                    },
-                  ],
                   indexed: false,
-                  internalType: "struct ClassReward.Task[]",
-                  name: "tasks",
-                  type: "tuple[]",
+                  internalType: "string",
+                  name: "status",
+                  type: "string",
                 },
               ],
               name: "ProgramCreated",
@@ -107,24 +91,18 @@ const contracts = {
               inputs: [
                 {
                   indexed: true,
-                  internalType: "bytes32",
-                  name: "role",
-                  type: "bytes32",
+                  internalType: "uint256",
+                  name: "programId",
+                  type: "uint256",
                 },
                 {
                   indexed: true,
-                  internalType: "bytes32",
-                  name: "previousAdminRole",
-                  type: "bytes32",
-                },
-                {
-                  indexed: true,
-                  internalType: "bytes32",
-                  name: "newAdminRole",
-                  type: "bytes32",
+                  internalType: "address",
+                  name: "student",
+                  type: "address",
                 },
               ],
-              name: "RoleAdminChanged",
+              name: "ProgramJoined",
               type: "event",
             },
             {
@@ -132,24 +110,18 @@ const contracts = {
               inputs: [
                 {
                   indexed: true,
-                  internalType: "bytes32",
-                  name: "role",
-                  type: "bytes32",
+                  internalType: "uint256",
+                  name: "programId",
+                  type: "uint256",
                 },
                 {
                   indexed: true,
                   internalType: "address",
-                  name: "account",
-                  type: "address",
-                },
-                {
-                  indexed: true,
-                  internalType: "address",
-                  name: "sender",
+                  name: "student",
                   type: "address",
                 },
               ],
-              name: "RoleGranted",
+              name: "StudentRegistered",
               type: "event",
             },
             {
@@ -157,24 +129,67 @@ const contracts = {
               inputs: [
                 {
                   indexed: true,
-                  internalType: "bytes32",
-                  name: "role",
-                  type: "bytes32",
+                  internalType: "uint256",
+                  name: "programId",
+                  type: "uint256",
+                },
+                {
+                  indexed: true,
+                  internalType: "uint256",
+                  name: "taskId",
+                  type: "uint256",
                 },
                 {
                   indexed: true,
                   internalType: "address",
-                  name: "account",
+                  name: "student",
                   type: "address",
                 },
                 {
-                  indexed: true,
-                  internalType: "address",
-                  name: "sender",
-                  type: "address",
+                  indexed: false,
+                  internalType: "uint256",
+                  name: "score",
+                  type: "uint256",
                 },
               ],
-              name: "RoleRevoked",
+              name: "SubmissionGraded",
+              type: "event",
+            },
+            {
+              anonymous: false,
+              inputs: [
+                {
+                  indexed: true,
+                  internalType: "uint256",
+                  name: "programId",
+                  type: "uint256",
+                },
+                {
+                  indexed: true,
+                  internalType: "uint256",
+                  name: "taskId",
+                  type: "uint256",
+                },
+                {
+                  indexed: true,
+                  internalType: "address",
+                  name: "student",
+                  type: "address",
+                },
+                {
+                  indexed: false,
+                  internalType: "string",
+                  name: "submissionUrl",
+                  type: "string",
+                },
+                {
+                  indexed: false,
+                  internalType: "uint256",
+                  name: "timestamp",
+                  type: "uint256",
+                },
+              ],
+              name: "SubmissionMade",
               type: "event",
             },
             {
@@ -205,9 +220,9 @@ const contracts = {
                   type: "string",
                 },
                 {
-                  indexed: true,
+                  indexed: false,
                   internalType: "uint256",
-                  name: "timestamp",
+                  name: "category",
                   type: "uint256",
                 },
               ],
@@ -308,45 +323,6 @@ const contracts = {
               type: "event",
             },
             {
-              inputs: [],
-              name: "DEFAULT_ADMIN_ROLE",
-              outputs: [
-                {
-                  internalType: "bytes32",
-                  name: "",
-                  type: "bytes32",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [],
-              name: "MINTER_ROLE",
-              outputs: [
-                {
-                  internalType: "bytes32",
-                  name: "",
-                  type: "bytes32",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [],
-              name: "URI_SETTER_ROLE",
-              outputs: [
-                {
-                  internalType: "bytes32",
-                  name: "",
-                  type: "bytes32",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
               inputs: [
                 {
                   internalType: "address",
@@ -397,6 +373,35 @@ const contracts = {
             {
               inputs: [
                 {
+                  internalType: "address",
+                  name: "",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              name: "balances",
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "string",
+                  name: "_externalId",
+                  type: "string",
+                },
+                {
                   internalType: "string",
                   name: "_name",
                   type: "string",
@@ -408,7 +413,43 @@ const contracts = {
                 },
               ],
               name: "createProgram",
-              outputs: [],
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "externalId",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "address",
+                  name: "owner",
+                  type: "address",
+                },
+                {
+                  internalType: "string",
+                  name: "description",
+                  type: "string",
+                },
+                {
+                  internalType: "uint256",
+                  name: "timestamp",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "status",
+                  type: "string",
+                },
+              ],
               stateMutability: "nonpayable",
               type: "function",
             },
@@ -429,10 +470,90 @@ const contracts = {
                   name: "_criteria",
                   type: "string",
                 },
+                {
+                  internalType: "uint256",
+                  name: "_category",
+                  type: "uint256",
+                },
               ],
               name: "createTask",
-              outputs: [],
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "criteria",
+                  type: "string",
+                },
+                {
+                  internalType: "uint256",
+                  name: "category",
+                  type: "uint256",
+                },
+              ],
               stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              name: "createdPrograms",
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "externalId",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "address",
+                  name: "owner",
+                  type: "address",
+                },
+                {
+                  internalType: "string",
+                  name: "description",
+                  type: "string",
+                },
+                {
+                  internalType: "uint256",
+                  name: "timestamp",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "status",
+                  type: "string",
+                },
+              ],
+              stateMutability: "view",
               type: "function",
             },
             {
@@ -462,31 +583,42 @@ const contracts = {
                   type: "uint256",
                 },
               ],
-              name: "getProgram",
+              name: "getProgramStudents",
+              outputs: [
+                {
+                  components: [
+                    {
+                      internalType: "string",
+                      name: "name",
+                      type: "string",
+                    },
+                    {
+                      internalType: "address",
+                      name: "account",
+                      type: "address",
+                    },
+                  ],
+                  internalType: "struct ClassReward.Student[]",
+                  name: "_programStudents",
+                  type: "tuple[]",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "uint256",
+                  name: "_programId",
+                  type: "uint256",
+                },
+              ],
+              name: "getProgramTasks",
               outputs: [
                 {
                   internalType: "uint256",
                   name: "id",
-                  type: "uint256",
-                },
-                {
-                  internalType: "string",
-                  name: "name",
-                  type: "string",
-                },
-                {
-                  internalType: "address",
-                  name: "owner",
-                  type: "address",
-                },
-                {
-                  internalType: "string",
-                  name: "description",
-                  type: "string",
-                },
-                {
-                  internalType: "uint256",
-                  name: "timestamp",
                   type: "uint256",
                 },
                 {
@@ -508,7 +640,12 @@ const contracts = {
                     },
                     {
                       internalType: "uint256",
-                      name: "timestamp",
+                      name: "score",
+                      type: "uint256",
+                    },
+                    {
+                      internalType: "uint256",
+                      name: "category",
                       type: "uint256",
                     },
                   ],
@@ -521,9 +658,25 @@ const contracts = {
               type: "function",
             },
             {
-              inputs: [],
-              name: "getProgramCount",
+              inputs: [
+                {
+                  internalType: "uint256",
+                  name: "programId",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "taskId",
+                  type: "uint256",
+                },
+              ],
+              name: "getSubmission",
               outputs: [
+                {
+                  internalType: "string",
+                  name: "",
+                  type: "string",
+                },
                 {
                   internalType: "uint256",
                   name: "",
@@ -536,101 +689,29 @@ const contracts = {
             {
               inputs: [
                 {
-                  internalType: "bytes32",
-                  name: "role",
-                  type: "bytes32",
-                },
-              ],
-              name: "getRoleAdmin",
-              outputs: [
-                {
-                  internalType: "bytes32",
-                  name: "",
-                  type: "bytes32",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
                   internalType: "uint256",
-                  name: "_programId",
+                  name: "programId",
                   type: "uint256",
                 },
                 {
                   internalType: "uint256",
-                  name: "_taskId",
+                  name: "taskId",
                   type: "uint256",
-                },
-              ],
-              name: "getTask",
-              outputs: [
-                {
-                  internalType: "uint256",
-                  name: "id",
-                  type: "uint256",
-                },
-                {
-                  internalType: "string",
-                  name: "name",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "criteria",
-                  type: "string",
-                },
-                {
-                  internalType: "uint256",
-                  name: "timestamp",
-                  type: "uint256",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
-                  internalType: "bytes32",
-                  name: "role",
-                  type: "bytes32",
                 },
                 {
                   internalType: "address",
-                  name: "account",
+                  name: "studentAddress",
                   type: "address",
                 },
+                {
+                  internalType: "uint256",
+                  name: "score",
+                  type: "uint256",
+                },
               ],
-              name: "grantRole",
+              name: "gradeSubmission",
               outputs: [],
               stateMutability: "nonpayable",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
-                  internalType: "bytes32",
-                  name: "role",
-                  type: "bytes32",
-                },
-                {
-                  internalType: "address",
-                  name: "account",
-                  type: "address",
-                },
-              ],
-              name: "hasRole",
-              outputs: [
-                {
-                  internalType: "bool",
-                  name: "",
-                  type: "bool",
-                },
-              ],
-              stateMutability: "view",
               type: "function",
             },
             {
@@ -660,55 +741,17 @@ const contracts = {
             {
               inputs: [
                 {
-                  internalType: "address",
-                  name: "account",
-                  type: "address",
+                  internalType: "string",
+                  name: "_programExternalId",
+                  type: "string",
                 },
                 {
-                  internalType: "uint256",
-                  name: "id",
-                  type: "uint256",
-                },
-                {
-                  internalType: "uint256",
-                  name: "amount",
-                  type: "uint256",
-                },
-                {
-                  internalType: "bytes",
-                  name: "data",
-                  type: "bytes",
+                  internalType: "string",
+                  name: "_name",
+                  type: "string",
                 },
               ],
-              name: "mint",
-              outputs: [],
-              stateMutability: "nonpayable",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
-                  internalType: "address",
-                  name: "to",
-                  type: "address",
-                },
-                {
-                  internalType: "uint256[]",
-                  name: "ids",
-                  type: "uint256[]",
-                },
-                {
-                  internalType: "uint256[]",
-                  name: "amounts",
-                  type: "uint256[]",
-                },
-                {
-                  internalType: "bytes",
-                  name: "data",
-                  type: "bytes",
-                },
-              ],
-              name: "mintBatch",
+              name: "join",
               outputs: [],
               stateMutability: "nonpayable",
               type: "function",
@@ -726,12 +769,17 @@ const contracts = {
                   type: "uint256",
                 },
               ],
-              name: "programs",
+              name: "joinedPrograms",
               outputs: [
                 {
                   internalType: "uint256",
                   name: "id",
                   type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "externalId",
+                  type: "string",
                 },
                 {
                   internalType: "string",
@@ -753,6 +801,11 @@ const contracts = {
                   name: "timestamp",
                   type: "uint256",
                 },
+                {
+                  internalType: "string",
+                  name: "status",
+                  type: "string",
+                },
               ],
               stateMutability: "view",
               type: "function",
@@ -760,9 +813,22 @@ const contracts = {
             {
               inputs: [
                 {
-                  internalType: "bytes32",
-                  name: "role",
-                  type: "bytes32",
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              name: "programStudents",
+              outputs: [
+                {
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
                 },
                 {
                   internalType: "address",
@@ -770,27 +836,144 @@ const contracts = {
                   type: "address",
                 },
               ],
-              name: "renounceRole",
-              outputs: [],
-              stateMutability: "nonpayable",
+              stateMutability: "view",
               type: "function",
             },
             {
               inputs: [
                 {
-                  internalType: "bytes32",
-                  name: "role",
-                  type: "bytes32",
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
                 },
                 {
                   internalType: "address",
-                  name: "account",
+                  name: "",
                   type: "address",
                 },
               ],
-              name: "revokeRole",
-              outputs: [],
-              stateMutability: "nonpayable",
+              name: "programTaskSubmissions",
+              outputs: [
+                {
+                  internalType: "string",
+                  name: "submissionUrl",
+                  type: "string",
+                },
+                {
+                  internalType: "uint256",
+                  name: "timestamp",
+                  type: "uint256",
+                },
+                {
+                  internalType: "bool",
+                  name: "graded",
+                  type: "bool",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              name: "programs",
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "externalId",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "address",
+                  name: "owner",
+                  type: "address",
+                },
+                {
+                  internalType: "string",
+                  name: "description",
+                  type: "string",
+                },
+                {
+                  internalType: "uint256",
+                  name: "timestamp",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "status",
+                  type: "string",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "string",
+                  name: "",
+                  type: "string",
+                },
+              ],
+              name: "programsByExternalId",
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "externalId",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "address",
+                  name: "owner",
+                  type: "address",
+                },
+                {
+                  internalType: "string",
+                  name: "description",
+                  type: "string",
+                },
+                {
+                  internalType: "uint256",
+                  name: "timestamp",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "status",
+                  type: "string",
+                },
+              ],
+              stateMutability: "view",
               type: "function",
             },
             {
@@ -880,12 +1063,75 @@ const contracts = {
             {
               inputs: [
                 {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+                {
+                  internalType: "address",
+                  name: "",
+                  type: "address",
+                },
+              ],
+              name: "studentScores",
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "",
+                  type: "address",
+                },
+              ],
+              name: "students",
+              outputs: [
+                {
                   internalType: "string",
-                  name: "newUri",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "address",
+                  name: "account",
+                  type: "address",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "uint256",
+                  name: "_programId",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "taskId",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "submissionUrl",
                   type: "string",
                 },
               ],
-              name: "setURI",
+              name: "submitTask",
               outputs: [],
               stateMutability: "nonpayable",
               type: "function",
@@ -941,7 +1187,12 @@ const contracts = {
                 },
                 {
                   internalType: "uint256",
-                  name: "timestamp",
+                  name: "score",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "category",
                   type: "uint256",
                 },
               ],
@@ -965,6 +1216,29 @@ const contracts = {
                 },
               ],
               stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "to",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256",
+                  name: "tokenId",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+              ],
+              name: "transferTokens",
+              outputs: [],
+              stateMutability: "nonpayable",
               type: "function",
             },
             {

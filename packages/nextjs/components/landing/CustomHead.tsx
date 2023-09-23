@@ -5,10 +5,10 @@ const CustomHead: React.FC = () => {
     return (
         <Head>
             <meta charSet="utf-8"/>
-            <title>Horizontal Layout | Skote - Admin & Dashboard Template</title>
+            <title>Rewardt</title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-            <meta content="Premium Multipurpose Admin & Dashboard Template" name="description"/>
-            <meta content="Themesbrand" name="author"/>
+            <meta content="Student Reward Sytem" name="description"/>
+            <meta content="Rewardt" name="author"/>
             <link rel="shortcut icon" href="assets/images/favicon.ico"/>
 
             <link href="assets/libs/tiny-slider/tiny-slider.css" rel="stylesheet"/>

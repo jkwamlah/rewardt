@@ -1,29 +1,63 @@
 import React, {useEffect, useState} from 'react';
 import feather from 'feather-icons';
-import {useFetchBlocks, useScaffoldContractWrite} from "~~/hooks/scaffold-eth";
+import {useScaffoldContract, useScaffoldContractWrite} from "~~/hooks/scaffold-eth";
+import { useAccount } from "wagmi";
 
-const ProgramCreate: React.FC = () => {
-    const { writeAsync, isLoading, isMining } = useScaffoldContractWrite({
-        contractName: "ClassReward",
-        functionName: "createProgram",
-        args: [],
-        // For payable functions, expressed in ETH
-        value: "0.01",
-        // The number of block confirmations to wait for before considering transaction to be confirmed (default : 1).
-        blockConfirmations: 1,
-        // The callback function to execute when the transaction is confirmed.
-        onBlockConfirmation: (txnReceipt) => {
-            console.log("Transaction blockHash", txnReceipt.blockHash);
-        },
-    });
+interface ProgramCreateProps {
+    resourceCreated: (type: string, blockHash: string) => void;
+}
 
+const ProgramCreate: React.FC<ProgramCreateProps> = (resourceCreated) => {
     useEffect(() => {
         feather.replace()
     }, []);
 
-    const [formData, setFormData] = useState({
-        name: '',
-        description: ''
+    const getExternalId = (length: number = 2) => {
+        const timestamp = new Date().getTime().toString(16);
+        const randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let randomString = '';
+
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * randomChars.length);
+            randomString += randomChars.charAt(randomIndex);
+        }
+
+        return timestamp + randomString;
+    };
+    const [formData, setFormData] = useState({externalId: getExternalId(), name: '', description: ''});
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertType, setAlertType] = useState('');
+    const [alertMessage, setAlertMessage] = useState('');
+
+    const {data: classReward} = useScaffoldContract({
+        contractName: "ClassReward",
+    });
+
+// Returns the greeting and can be called in any function, unlike useScaffoldContractRead
+    await classReward?.read.greeting();
+
+// Used to write to a contract and can be called in any function
+
+    const {data: walletClient} = useWalletClient();
+    const {data: yourContract} = useScaffoldContract({
+        contractName: "YourContract",
+        walletClient,
+    });
+    const setGreeting = async () => {
+        // Call the method in any function
+        await yourContract?.write.setGreeting(["the greeting here"]);
+    };
+
+    const {writeAsync} = useScaffoldContractWrite({
+        contractName: "ClassReward",
+        functionName: "createProgram",
+        args: [formData.externalId, formData.name, formData.description],
+        onBlockConfirmation: (txnReceipt) => {
+            console.log("Transaction blockHash", txnReceipt.blockHash);
+        },
+        onError: (error) => {
+            console.log('error', error)
+        }
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -31,17 +65,29 @@ const ProgramCreate: React.FC = () => {
         setFormData({...formData, [name]: value,});
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const account = useAccount()
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Implement your logic to submit data to a smart contract here
-        console.log('Form data submitted:', formData);
-        writeAsync(formData).then(r => console.log(r))
+
+        try {
+            console.log('Form data submitted:', formData);
+            const tx = await classReward?.connect(account.address).createProgram(formData);
+            console.log("Transaction successful:", tx);
+        } catch (error) {
+            console.error("Error:", error);
+        }
     };
-
-
 
     return (
         <div className="col-lg-12 mt-3">
+            {showAlert &&
+                <div className={`alert alert-dismissible fade show text-capitalize bg-soft-danger'`} role="alert">
+                    {alertMessage}
+                    <button onClick={() => setShowAlert(false)} type="button" className="btn btn-soft btn-close"
+                            data-bs-dismiss="alert" aria-label="Close"/>
+                </div>}
+
             <div className="card border-0 rounded shadow">
                 <div className="card-body">
                     <form onSubmit={handleSubmit}>
@@ -54,7 +100,9 @@ const ProgramCreate: React.FC = () => {
                                         <input name="name" id="name" type="text" className="form-control ps-5"
                                                placeholder="Name :"
                                                value={formData.name}
-                                               onChange={handleChange}/>
+                                               onChange={handleChange}
+                                               required
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +116,9 @@ const ProgramCreate: React.FC = () => {
                                                   className="form-control ps-5"
                                                   placeholder="Description :"
                                                   value={formData.description}
-                                                  onChange={handleChange}/>
+                                                  onChange={handleChange}
+                                                  required
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -76,9 +126,9 @@ const ProgramCreate: React.FC = () => {
 
                         <div className="row">
                             <div className="col-sm-12 d-flex justify-content-end">
-                                <input type="submit" id="submit" className="btn btn-primary" value="Create"
-                                       onClick={() => writeAsync()}
-                                />
+                                <button type="submit" id="submit" className="btn btn-primary" onClick={() => writeAsync}
+                                >Create
+                                </button>
                             </div>
                         </div>
                     </form>

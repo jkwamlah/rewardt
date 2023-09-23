@@ -2,8 +2,8 @@ import React from 'react';
 
 interface Student {
     id: number;
+    name: string;
     address: string;
-    tokens: number;
 }
 
 interface StudentListProps {
@@ -27,14 +27,17 @@ const StudentList: React.FC<StudentListProps> = (students, sendToken) => {
                         <div className="flex-1 ms-2">
                             <div className="overflow-hidden d-flex justify-content-between align-items-center">
                                 <div className="text-dark mb-0 d-flex flex-column">
-                                    <span className="">{student.address}</span>
+                                    <span className="text-capitalize">{student.name}</span>
                                     <span className="">
-                                        <small className="text-muted">{student.tokens} Tokens</small>
+                                        <small className="text-muted">{student.address}</small>
                                     </span>
                                 </div>
                                 {sendToken && <div className="col-auto">
+                                    <a href="#" className="btn btn-icon btn-warning mx-1">
+                                        <i className="uil uil-times"/>
+                                    </a>
                                     <a href="#" className="btn btn-icon btn-primary">
-                                        <i className="uil uil-message"/>
+                                        <i className="uil uil-check"/>
                                     </a>
                                 </div>}
                             </div>

@@ -4,7 +4,6 @@ import Layout from "~~/components/Layout";
 import ProfileHero from "~~/components/dashboard/ProfileHero";
 import ProfileContent from "~~/components/dashboard/ProfileContent";
 
-
 const Dashboard: NextPage = () => {
   return (
     <Layout>
