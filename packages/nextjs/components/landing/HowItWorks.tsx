@@ -38,8 +38,8 @@ const HowItWorks = () => {
                       <h6 className="title mb-1 text-capitalize">Connect wallet</h6>
                       <p className="timeline-subtitle mt-3 mb-0 text-muted">
                         To participate in the reward system, a user must first connect their digital wallet to the
-                        platform or application where the reward system is implemented. This wallet serves as the user's
-                        digital identity and storage for the tokens they will earn.
+                        platform or application where the reward system is implemented. This wallet serves as the
+                        digital identity and storage for the tokens the user will earn.
                       </p>
                     </div>
                   </div>
