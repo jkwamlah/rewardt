@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {ConnectButton} from '@rainbow-me/rainbowkit';
 import {useAccount} from "wagmi";
+import Link from "next/link";
+import {LinkIcon} from "@heroicons/react/20/solid";
 
 const Login = () => {
     const [isConnected, setIsConnected] = useState(false)
@@ -73,18 +75,18 @@ const Login = () => {
                                                 <div className="row my-5">
                                                     <div className="col-6">
                                                         <div className="d-grid">
-                                                            <a href="/"
+                                                            <Link href="/"
                                                                className="btn btn-outline-primary">
                                                                 <i className="mdi mdi-facebook text-primary"/> Home
-                                                            </a>
+                                                            </Link>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-6">
                                                         <div className="d-grid">
-                                                            <a href="/dashboard" className="btn btn-primary">
-                                                                <i className="mdi mdi-google text-danger"/> Dashboard
-                                                            </a>
+                                                            <Link className="btn btn-primary" href="/dashboard">
+                                                               <i className="uil uil-home text-danger"/> Dashboard
+                                                            </Link>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -3956,6 +3956,7 @@ __metadata:
     "@heroicons/react": ^2.0.11
     "@rainbow-me/rainbowkit": ^0.12.15
     "@trivago/prettier-plugin-sort-imports": ^4.1.1
+    "@types/eslint": ^8
     "@types/feather-icons": ^4
     "@types/node": ^17.0.35
     "@types/react": ^18.0.9
@@ -3965,6 +3966,7 @@ __metadata:
     "@uniswap/sdk": ^3.0.3
     autoprefixer: ^10.4.12
     daisyui: ^2.31.0
+    eslint: ^8.50.0
     eslint-config-next: ^13.1.6
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.2.1
@@ -9824,7 +9826,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.26.0":
+"eslint@npm:^8.26.0, eslint@npm:^8.50.0":
   version: 8.50.0
   resolution: "eslint@npm:8.50.0"
   dependencies:
