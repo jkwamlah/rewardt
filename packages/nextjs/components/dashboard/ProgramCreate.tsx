@@ -47,11 +47,7 @@ const ProgramCreate: React.FC<ProgramCreateProps> = (resourceCreated) => {
         setFormData({...formData, [name]: value,});
     };
 
-    const account = useAccount()
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-    };
+    const { address } = useAccount();
 
     return (
         <div className="col-lg-12 mt-3">
