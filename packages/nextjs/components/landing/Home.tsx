@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const HomeSection: React.FC = () => {
   return (
@@ -17,12 +18,12 @@ const HomeSection: React.FC = () => {
                 Bootstrap v5 HTML pages.
               </p>
               <div className="mt-4">
-                <a href="">
-                  <Image src="/assets/images/app/app.png" className="m-1" height="50" alt="" />
-                </a>
-                <a href="">
-                  <Image src="assets/images/app/playstore.png" className="m-1" height="50" alt="" />
-                </a>
+                <Link href="">
+                  <Image src="/assets/images/app/app.png" className="m-1" height="50" width="170" alt="" />
+                </Link>
+                <Link href="">
+                  <Image src="/assets/images/app/playstore.png" className="m-1" height="50" width="170" alt="" />
+                </Link>
                 <ul className="list-unstyled h5 text-warning mb-0 mt-2">
                   <li className="list-inline-item mb-0 align-middle">
                     <i className="mdi mdi-star" />
@@ -46,7 +47,7 @@ const HomeSection: React.FC = () => {
           </div>
           <div className="col-lg-5 col-md-5 mt-4 pt-2 mt-sm-0 pt-sm-0">
             <div className="modern-app-bg-shape position-relative">
-              <Image src="/assets/images/app/classic01.png" className="img-fluid mover mx-auto d-block" alt="" />
+              <Image src="/assets/images/app/classic01.png" height="100" width="360" className="img-fluid mover mx-auto d-block" alt="" />
               <div className="modern-app-absolute-left">
                 <div className="card">
                   <div className="features feature-primary d-flex justify-content-between align-items-center rounded shadow p-3">
@@ -87,7 +88,7 @@ const HomeSection: React.FC = () => {
                 </div>
               </div>
               <div className="position-absolute top-0 start-50 translate-middle z-index-m-1">
-                <Image src="/assets/images/shapes/dots.svg" className="avatar avatar-xl-large" alt="" />
+                <Image src="/assets/images/shapes/dots.svg" height="50" width="50" className="avatar avatar-xl-large" alt="" />
               </div>
               <div className="position-absolute top-0 start-0 translate-middle">
                 <p className="avatar avatar-small bg-primary rounded-md mb-0 spin-anything" style={{ opacity: 0.05 }} />

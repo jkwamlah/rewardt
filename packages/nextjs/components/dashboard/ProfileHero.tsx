@@ -12,7 +12,7 @@ const ProfileHero: React.FC = () => {
                 <div className="row align-items-center">
                   <div className="col-lg-2 col-md-3 text-md-start text-center">
                     <Image
-                      src="assets/images/account/bg.png"
+                      src="/assets/images/account/bg.png"
                       className="avatar avatar-large rounded-circle shadow d-block mx-auto"
                       alt=""
                     />
