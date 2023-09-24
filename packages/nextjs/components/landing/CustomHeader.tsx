@@ -23,8 +23,8 @@ const CustomHeader: React.FC = () => {
       <header id="topnav" className="defaultscroll sticky">
         <div className="container">
           <Link className="logo" href="/">
-            <Image src="/assets/images/logo-color.png" height="45" width="50" className="logo-light-mode" alt="" />
-            <Image src="/assets/images/logo-color.png" height="45" width="50" className="logo-dark-mode" alt="" />
+            <Image src="/assets/images/logo-color.png" height="45" width="160" className="logo-light-mode" alt="" />
+            <Image src="/assets/images/logo-color.png" height="45" width="160" className="logo-dark-mode" alt="" />
           </Link>
 
           <div className="menu-extras">
