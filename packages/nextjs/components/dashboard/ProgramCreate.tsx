@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import feather from "feather-icons";
-import { useAccount } from "wagmi";
 import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 interface ProgramCreateProps {
@@ -36,6 +35,7 @@ const ProgramCreate: React.FC<ProgramCreateProps> = () => {
     onBlockConfirmation: txnReceipt => {
       console.log("Transaction blockHash", txnReceipt.blockHash);
       setAlertMessage(`Program Created with blockHash ${txnReceipt.blockHash}`);
+      setAlertType(`info`);
     },
     onError: error => {
       console.log("error", error);
@@ -47,12 +47,14 @@ const ProgramCreate: React.FC<ProgramCreateProps> = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const { address } = useAccount();
-
   return (
     <div className="col-lg-12 mt-3">
       {showAlert && (
-        <div className={`alert alert-dismissible fade show text-capitalize bg-soft-danger'`} role="alert">
+        <div
+          className={`alert alert-dismissible fade show text-capitalize
+         ${alertType === "info" ? "bg-soft-primary" : "bg-soft-danger"}'`}
+          role="alert"
+        >
           {alertMessage}
           <button
             onClick={() => setShowAlert(false)}
