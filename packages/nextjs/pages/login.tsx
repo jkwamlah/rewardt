@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useAccount } from "wagmi";
-import Image from "next/image";
 
 const Login = () => {
   const [isConnected, setIsConnected] = useState(false);
