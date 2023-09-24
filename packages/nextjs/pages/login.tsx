@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {ethers} from 'ethers';
 import {ConnectButton} from '@rainbow-me/rainbowkit';
 import {useAccount} from "wagmi";
 
@@ -10,13 +9,14 @@ const Login = () => {
         return typeof window.ethereum !== 'undefined';
     };
 
+    const account = useAccount()
+
     useEffect(() => {
         const checkConnection = () => {
             const status = getProviderConnectionStatus();
             setIsConnected(status);
         };
 
-        const account = useAccount
         console.log('account', account)
 
         checkConnection();
@@ -24,19 +24,8 @@ const Login = () => {
         return () => clearInterval(intervalId);
     }, []);
 
-
     return (
         <div>
-            {/*<div id="preloader">*/}
-            {/*    <div id="status">*/}
-            {/*        <div className="spinner">*/}
-            {/*            <div className="double-bounce1"/>*/}
-            {/*            <div className="double-bounce2"/>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-            {/* Loader */}
-
             <div className="back-to-home">
                 <a href="#" className="back-button btn btn-icon btn-primary">
                     <i data-feather="arrow-left" className="icons"/>
@@ -63,7 +52,7 @@ const Login = () => {
                                         <div className="row">
                                             <div className="col-lg-12 my-4 text-center">
                                                 <div className="row">
-                                                    {!isConnected && <p class="text-muted mx-auto">
+                                                    {!isConnected && <p className="text-muted mx-auto">
                                                         Do more by connecting your wallet and gain access to the your
                                                         personalized dashboard.
                                                     </p>}

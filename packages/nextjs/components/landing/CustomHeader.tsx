@@ -40,7 +40,8 @@ const CustomHeader: React.FC = () => {
 
                     <ul className="buy-button list-inline mb-0">
                         <li className="list-inline-item mb-0">
-                            <RainbowKitCustomConnectButton/>
+                            <a href="/login" className="btn btn-primary">Login</a>
+                            {/*<RainbowKitCustomConnectButton/>*/}
                         </li>
                     </ul>
 

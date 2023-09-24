@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import feather from 'feather-icons';
-import {useScaffoldContract, useScaffoldContractWrite} from "~~/hooks/scaffold-eth";
+import { useScaffoldContractWrite} from "~~/hooks/scaffold-eth";
 import {useAccount} from "wagmi";
 
 interface ProgramCreateProps {
@@ -28,10 +28,6 @@ const ProgramCreate: React.FC<ProgramCreateProps> = (resourceCreated) => {
     const [showAlert, setShowAlert] = useState(false);
     const [alertType, setAlertType] = useState('');
     const [alertMessage, setAlertMessage] = useState('');
-
-    const {data: classReward} = useScaffoldContract({
-        contractName: "ClassReward",
-    });
 
     const {writeAsync} = useScaffoldContractWrite({
         contractName: "ClassReward",
@@ -104,8 +100,9 @@ const ProgramCreate: React.FC<ProgramCreateProps> = (resourceCreated) => {
 
                         <div className="row">
                             <div className="col-sm-12 d-flex justify-content-end">
-                                <button type="submit" id="submit" className="btn btn-primary" onClick={() => writeAsync}
-                                >Create
+                                <button type="submit" id="submit" className="btn btn-primary"
+                                        onClick={() => writeAsync}>
+                                    Create
                                 </button>
                             </div>
                         </div>
