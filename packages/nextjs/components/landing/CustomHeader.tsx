@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const CustomHeader: React.FC = () => {
   const toggleMenu = () => {
@@ -22,8 +23,8 @@ const CustomHeader: React.FC = () => {
       <header id="topnav" className="defaultscroll sticky">
         <div className="container">
           <Link className="logo" href="/">
-            <img src="assets/images/logo-color.png" height="45" className="logo-light-mode" alt="" />
-            <img src="assets/images/logo-light.png" height="45" className="logo-dark-mode" alt="" />
+            <Image src="assets/images/logo-color.png" height="45" className="logo-light-mode" alt="" />
+            <Image src="assets/images/logo-light.png" height="45" className="logo-dark-mode" alt="" />
           </Link>
 
           <div className="menu-extras">

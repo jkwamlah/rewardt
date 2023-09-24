@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const ProfileHero: React.FC = () => {
   return (
@@ -10,7 +11,7 @@ const ProfileHero: React.FC = () => {
               <div className="card-body">
                 <div className="row align-items-center">
                   <div className="col-lg-2 col-md-3 text-md-start text-center">
-                    <img
+                    <Image
                       src="assets/images/account/bg.png"
                       className="avatar avatar-large rounded-circle shadow d-block mx-auto"
                       alt=""

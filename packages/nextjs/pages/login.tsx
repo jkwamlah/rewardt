@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
+import Image from "next/image";
 
 const Login = () => {
   const [isConnected, setIsConnected] = useState(false);
@@ -10,15 +11,11 @@ const Login = () => {
     return typeof window.ethereum !== "undefined";
   };
 
-  const account = useAccount();
-
   useEffect(() => {
     const checkConnection = () => {
       const status = getProviderConnectionStatus();
       setIsConnected(status);
     };
-
-    console.log("account", account);
 
     checkConnection();
     const intervalId = setInterval(checkConnection, 2000);
@@ -33,20 +30,19 @@ const Login = () => {
         </a>
       </div>
 
-      {/* Hero Start */}
       <section className="bg-home d-flex align-items-center">
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-7 col-md-6">
               <div className="me-lg-5">
-                <img src="assets/images/user/login.svg" className="img-fluid d-block mx-auto" alt="" />
+                <Image src="assets/images/user/login.svg" className="img-fluid d-block mx-auto" alt="" />
               </div>
             </div>
             <div className="col-lg-5 col-md-6">
               <div className="card shadow-md login-page shadow rounded border-0">
                 <div className="card-body" style={{ minHeight: 100 }}>
                   <div className="card-title mt-4">
-                    <img
+                    <Image
                       src="assets/images/rewardt.svg"
                       className="img-fluid d-block mx-auto"
                       style={{ height: 30 }}
