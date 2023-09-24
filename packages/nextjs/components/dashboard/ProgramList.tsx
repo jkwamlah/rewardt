@@ -28,26 +28,40 @@ const ProgramList: React.FC<ProgramListProps> = ({ programs, programClicked, han
 
   return (
     <div className="row">
-      <div className="col-lg-8 col-md-6 mt-4 mt-sm-0 pt-sm-0">
+      <div className="col-lg-12 col-md-6 mt-4 mt-sm-0 pt-sm-0">
         <div className="row">
-          <div className="col-12 filters-group-wrap">
-            <div className="filters-group">
-              <ul className="container-filter list-inline mb-0 filter-options">
-                {filters.map((filter, index) => (
-                  <li
-                    key={index}
-                    className={`list-inline-item categories-name border text-dark rounded text-capitalize ${
-                      filter === activeFilter ? "active" : ""
-                    }`}
-                    onClick={() => {
-                      setActiveFilter(filter);
-                      handleFilter(filter);
-                    }}
-                  >
-                    {filter}
-                  </li>
-                ))}
-              </ul>
+          <div className="col-12 d-flex align-items-center justify-content-between">
+            <div className="filters-group-wrap">
+              <div className="filters-group">
+                <ul className="container-filter list-inline mb-0 filter-options">
+                  {filters.map((filter, index) => (
+                    <li
+                      key={index}
+                      className={`list-inline-item categories-name border text-dark rounded text-capitalize ${
+                        filter === activeFilter ? "active" : ""
+                      }`}
+                      onClick={() => {
+                        setActiveFilter(filter);
+                        handleFilter(filter);
+                      }}
+                    >
+                      {filter}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="d-flex justify-content-end">
+              <form className="ms-0">
+                <input
+                  type="text"
+                  id="search"
+                  name="search"
+                  className="rounded-pill border px-2 shadow-xl"
+                  placeholder="Search..."
+                  style={{ height: "40px" }}
+                />
+              </form>
             </div>
           </div>
         </div>
@@ -76,8 +90,6 @@ const ProgramList: React.FC<ProgramListProps> = ({ programs, programClicked, han
               </ul>
 
               <div className="mt-2">
-                {/*<span className="badge bg-soft-warning">Completed</span>*/}
-
                 <div className="mt-2 d-flex justify-content-between">
                   <span
                     className={`badge text-bg-soft d-flex align-items-center text-capitalize ${getClassProgressStatus(

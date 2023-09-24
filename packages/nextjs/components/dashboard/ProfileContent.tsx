@@ -6,6 +6,7 @@ import ProgramJoin from "~~/components/dashboard/ProgramJoin";
 import ProgramList from "~~/components/dashboard/ProgramList";
 import TaskCreate from "~~/components/dashboard/TaskCreate";
 import TokenList from "~~/components/dashboard/TokenList";
+import TokenRedeem from "~~/components/dashboard/TokenRedeem";
 
 const ProfileContent: React.FC = () => {
   useEffect(() => {
@@ -134,19 +135,19 @@ const ProfileContent: React.FC = () => {
       <div className="container mt-lg-3">
         <div className="row">
           <div className="col-lg-4 col-md-6 col-12 d-lg-block d-none">
-            <div className="sidebar sticky-bar p-4 rounded shadow">
+            <div className="sidebar sticky-bar p-4 rounded shadow-md">
               <div className="widget pb-4 border-bottom">
-                <h5 className="widget-title">Community</h5>
+                <h5 className="widget-title">Welcome!</h5>
                 <div className="row mt-4">
                   <div className="col-6 text-center">
-                    <i data-feather="user-plus" className="fea icon-ex-md text-primary mb-1" />
-                    <h5 className="mb-0">2588</h5>
-                    <p className="text-muted mb-0">Followers</p>
+                    <i data-feather="book-open" className="fea icon-ex-md text-primary mb-1" />
+                    <h5 className="mb-0">0</h5>
+                    <p className="text-muted mb-0">Programs</p>
                   </div>
                   <div className="col-6 text-center">
-                    <i data-feather="users" className="fea icon-ex-md text-primary mb-1" />
-                    <h5 className="mb-0">454</h5>
-                    <p className="text-muted mb-0">Following</p>
+                    <i data-feather="circle" className="fea icon-ex-md text-primary mb-1" />
+                    <h5 className="mb-0">0</h5>
+                    <p className="text-muted mb-0">Tokens</p>
                   </div>
                 </div>
               </div>
@@ -199,34 +200,6 @@ const ProfileContent: React.FC = () => {
                   </button>
                 </div>
               )}
-
-              {subMenu === "courses" && (
-                <button
-                  onClick={() => handleSubMenuClicked("create course")}
-                  className="btn btn-outline-primary text-capitalize"
-                >
-                  add course
-                </button>
-              )}
-
-              {subMenu === "students" && (
-                <div className="d-flex justify-content-center pt-2">
-                  <div className="col-lg-12 col-md-10">
-                    <div className="subcribe-form">
-                      <form className="ms-0">
-                        <input
-                          type="text"
-                          id="search"
-                          name="search"
-                          className="rounded-pill border"
-                          placeholder="Search..."
-                          style={{ height: "40px" }}
-                        />
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
 
             <div className="row">
@@ -240,6 +213,7 @@ const ProfileContent: React.FC = () => {
                     />
                   )}
                   {subMenu === "tokens" && <TokenList />}
+                  {subMenu === "redeem" && <TokenRedeem />}
 
                   {subMenu === "create program" && <ProgramCreate resourceCreated={handleResourceCreated} />}
                   {subMenu === "join program" && <ProgramJoin resourceCreated={handleResourceCreated} />}

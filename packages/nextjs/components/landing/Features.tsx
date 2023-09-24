@@ -6,21 +6,14 @@ const Features = () => {
     {
       id: 1,
       icon: "/assets/images/icon/chat.svg",
-      title: "Reward Points System",
+      title: "Customizable Reward Tokens",
       description:
-        "Earn points for achieving academic goals, participating in extracurricular activities, or displaying positive behavior.",
-    },
-    {
-      id: 2,
-      icon: "/assets/images/icon/customer-service.svg",
-      title: "Gamification",
-      description:
-        "Gamification elements like badges, levels, and challenges to engage students and make the reward system more enjoyable.",
+        "Earn points for achieving academic goals or participating in extracurricular activities. Redeem tokens as NFTs or FTs.",
     },
     {
       id: 3,
       icon: "/assets/images/icon/user.svg",
-      title: "Security and Trust",
+      title: "Security & Transparency",
       description:
         "Robust security measures like encryption and access controls, to ensure adherence to privacy compliance standards.",
     },
@@ -29,20 +22,6 @@ const Features = () => {
       icon: "/assets/images/icon/domain.png",
       title: "Educational Tools Integration",
       description: "Integrate with existing educational tools and systems, such as LMSs to gather achievement data.",
-    },
-    {
-      id: 5,
-      icon: "/assets/images/icon/hotel.svg",
-      title: "Customizable Rewards",
-      description:
-        "Define a list of rewards, both NFTs (badges, certificates) and FTs (gift cards, discounts), that students can redeem.",
-    },
-    {
-      id: 6,
-      icon: "/assets/images/icon/speedometer.svg",
-      title: "Blockchain Transparency",
-      description:
-        "Criteria for earning points and the allocation of rewards are clearly communicated to all users",
     },
   ];
 
@@ -56,11 +35,10 @@ const Features = () => {
               data-wow-delay=".1s"
               style={{ visibility: "visible", animationDelay: "0.1s", animationName: "fadeInUp" }}
             >
-              <span className="badge rounded-pill bg-success">Features</span>
-              <h4 className="title my-4">Communication Resources</h4>
+              <h4 className="title my-4">Amazing features await you!</h4>
               <p className="text-muted para-desc mx-auto mb-0">
-                Start working with <span className="text-primary fw-bold">Landrick</span> that can provide everything
-                you need to generate awareness, drive traffic, connect.
+                We offer various features to promote positive behavior and incentivize students for their achievements
+                and contributions.
               </p>
             </div>
           </div>
