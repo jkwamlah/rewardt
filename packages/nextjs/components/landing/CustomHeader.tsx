@@ -55,12 +55,12 @@ const CustomHeader: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="#features" className="sub-menu-item">
+                <Link href="/#features" className="sub-menu-item">
                   Features
                 </Link>
               </li>
               <li>
-                <Link href="#how-it-works" className="sub-menu-item">
+                <Link href="/#how-it-works" className="sub-menu-item">
                   How It Works
                 </Link>
               </li>
