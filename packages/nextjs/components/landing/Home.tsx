@@ -10,12 +10,12 @@ const HomeSection: React.FC = () => {
           <div className="col-lg-7 col-md-7">
             <div className="title-heading">
               <h1 className="heading fw-bold mb-3">
-                Increasing the <br /> value of your life
+                Unlock a World of <br /> Rewards for Students
                 <span className="typewrite" data-period="4000" datatype='[ "..." ]' />
               </h1>
               <p className="para-desc text-muted">
-                Launch your campaign and benefit from our expertise on designing and managing conversion-centered
-                Bootstrap v5 HTML pages.
+                Discover a new era of student engagement and motivation. Earn tokens, achieve milestones, and embrace
+                the path to success. Start your rewarding journey today!
               </p>
               <div className="mt-4">
                 <Link href="">
@@ -47,7 +47,13 @@ const HomeSection: React.FC = () => {
           </div>
           <div className="col-lg-5 col-md-5 mt-4 pt-2 mt-sm-0 pt-sm-0">
             <div className="modern-app-bg-shape position-relative">
-              <Image src="/assets/images/app/classic01.png" height="100" width="360" className="img-fluid mover mx-auto d-block" alt="" />
+              <Image
+                src="/assets/images/app/classic01.png"
+                height="100"
+                width="360"
+                className="img-fluid mover mx-auto d-block"
+                alt=""
+              />
               <div className="modern-app-absolute-left">
                 <div className="card">
                   <div className="features feature-primary d-flex justify-content-between align-items-center rounded shadow p-3">
