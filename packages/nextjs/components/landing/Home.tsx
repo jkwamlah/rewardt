@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const HomeSection: React.FC = () => {
   return (
-    <section className="bg-half d-table w-100 overflow-hidden">
+    <section className="bg-half d-table w-100 overflow-hidden pb-0">
       <div className="container position-relative">
         <div className="row align-items-center">
           <div className="col-lg-7 col-md-7">

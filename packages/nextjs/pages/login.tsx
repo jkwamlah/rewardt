@@ -23,18 +23,12 @@ const Login = () => {
 
   return (
     <div>
-      <div className="back-to-home">
-        <a href="#" className="back-button btn btn-icon btn-primary">
-          <i data-feather="arrow-left" className="icons" />
-        </a>
-      </div>
-
       <section className="bg-home d-flex align-items-center">
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-7 col-md-6">
               <div className="me-lg-5">
-                <Image src="assets/images/user/login.svg" className="img-fluid d-block mx-auto" alt="" />
+                <Image src="/assets/images/user/login.svg" height={500} width={800} className="img-fluid d-block mx-auto" alt="" />
               </div>
             </div>
             <div className="col-lg-5 col-md-6">
@@ -42,9 +36,10 @@ const Login = () => {
                 <div className="card-body" style={{ minHeight: 100 }}>
                   <div className="card-title mt-4">
                     <Image
-                      src="assets/images/rewardt.svg"
+                      src="/assets/images/rewardt.svg"
                       className="img-fluid d-block mx-auto"
-                      style={{ height: 30 }}
+                      height={30}
+                      width={100}
                       alt=""
                     />
                   </div>
