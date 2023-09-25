@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import feather from "feather-icons";
 import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
+import getErrorMessage from "~~/plugins/errorMessage";
 
-interface ProgramCreateProps {
-  resourceCreated: (type: string, blockHash: string) => void;
-}
-
-const ProgramCreate: React.FC<ProgramCreateProps> = () => {
+const ProgramCreate = () => {
   useEffect(() => {
     feather.replace();
   }, []);
@@ -20,25 +17,34 @@ const ProgramCreate: React.FC<ProgramCreateProps> = () => {
       const randomIndex = Math.floor(Math.random() * randomChars.length);
       randomString += randomChars.charAt(randomIndex);
     }
-
     return timestamp + randomString;
   };
   const [formData, setFormData] = useState({ externalId: getExternalId(), name: "", description: "" });
   const [showAlert, setShowAlert] = useState(false);
-  const [alertType, setAlertType] = useState("");
+  const [alertType, setAlertType] = useState("info");
   const [alertMessage, setAlertMessage] = useState("");
+  const [loader, setLoader] = useState(false);
 
-  const { writeAsync } = useScaffoldContractWrite({
+  const contract = useScaffoldContractWrite({
     contractName: "ClassReward",
     functionName: "createProgram",
+    blockConfirmations: 1,
     args: [formData.externalId, formData.name, formData.description],
+    mode: undefined,
     onBlockConfirmation: txnReceipt => {
-      console.log("Transaction blockHash", txnReceipt.blockHash);
-      setAlertMessage(`Program Created with blockHash ${txnReceipt.blockHash}`);
-      setAlertType(`info`);
+      console.log("📦 Transaction blockHash", txnReceipt.blockHash);
+      setAlertType("info");
+      setShowAlert(true);
+      setAlertMessage(`Program created with blockHash ${txnReceipt.blockHash}`);
+      setLoader(false);
     },
     onError: error => {
-      console.log("error", error);
+      setLoader(false);
+      setAlertType("danger");
+      setShowAlert(true);
+      console.log("data", error.message);
+      const message = getErrorMessage(error.message);
+      message ? setAlertMessage(message) : setAlertMessage("An error occurred.");
     },
   });
 
@@ -47,11 +53,21 @@ const ProgramCreate: React.FC<ProgramCreateProps> = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    await contract.writeAsync({
+      args: [formData.externalId, formData.name, formData.description],
+      value: undefined,
+      overrides: undefined,
+    });
+    setLoader(false);
+  };
+
   return (
     <div className="col-lg-12 mt-3">
       {showAlert && (
         <div
-          className={`alert alert-dismissible fade show text-capitalize
+          className={`alert alert-dismissible fade show text-capitalize bg-soft-primary
          ${alertType === "info" ? "bg-soft-primary" : "bg-soft-danger"}'`}
           role="alert"
         >
@@ -66,9 +82,20 @@ const ProgramCreate: React.FC<ProgramCreateProps> = () => {
         </div>
       )}
 
+      {loader && (
+        <div id="preloader">
+          <div id="status">
+            <div className="spinner">
+              <div className="double-bounce1" />
+              <div className="double-bounce2" />
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="card border-0 rounded shadow">
         <div className="card-body">
-          <form onSubmit={() => writeAsync}>
+          <form onSubmit={event => handleSubmit(event)}>
             <div className="row mt-4">
               <div className="col-lg-12">
                 <div className="mb-3">
@@ -111,7 +138,7 @@ const ProgramCreate: React.FC<ProgramCreateProps> = () => {
 
             <div className="row">
               <div className="col-sm-12 d-flex justify-content-end">
-                <button type="submit" id="submit" className="btn btn-primary" onClick={() => writeAsync}>
+                <button type="submit" id="submit" className="btn btn-primary">
                   Create
                 </button>
               </div>
