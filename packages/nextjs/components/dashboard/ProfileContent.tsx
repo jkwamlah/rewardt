@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+// import { BigNumber } from "ethers";
 import feather from "feather-icons";
+import { useAccount } from "wagmi";
 import ProgramCreate from "~~/components/dashboard/ProgramCreate";
 import ProgramDetail from "~~/components/dashboard/ProgramDetail";
 import ProgramJoin from "~~/components/dashboard/ProgramJoin";
@@ -7,65 +9,27 @@ import ProgramList from "~~/components/dashboard/ProgramList";
 import TaskCreate from "~~/components/dashboard/TaskCreate";
 import TokenList from "~~/components/dashboard/TokenList";
 import TokenRedeem from "~~/components/dashboard/TokenRedeem";
+import { getProgramsCreated } from "~~/plugins/programs";
 
 const ProfileContent: React.FC = () => {
+  const account = useAccount();
+
   useEffect(() => {
     feather.replace();
-  }, []);
 
-  const initialPrograms = [
-    {
-      id: 1,
-      name: "July 2023 ABSA Web3 Bootcamp",
-      description:
-        "A web3 bootcamp organized by ABSA and designed for young ones to develop innovative web3 solutions.",
-      status: "completed",
-    },
-    {
-      id: 2,
-      name: "August 2023 Web3 Bootcamp",
-      description:
-        "An interactive web3 bootcamp designed for young ones to explore, learn and develop innovative solutions.",
-      status: "ongoing",
-      students: [
-        "0xF9e8D729c2724437209cDB24826b2a056B9fe84F",
-        "0xF9e8D729c2724437209cDB24826b2a056B9fe84F",
-        "0xF9e8D729c2724437209cDB24826b2a056B9fe84F",
-      ],
-    },
-    {
-      id: 3,
-      name: "October 2023 Incubator Program",
-      description:
-        "A Mastercard sponsored program designed for young entrepreneurs to grow their ideas in solving problems in Africa.",
-      status: "draft",
-      students: [
-        "0xF9e8D729c2724437209cDB24826b2a056B9fe84F",
-        "0xF9e8D729c2724437209cDB24826b2a056B9fe84F",
-        "0xF9e8D729c2724437209cDB24826b2a056B9fe84F",
-      ],
-    },
-    {
-      id: 4,
-      name: "November 2023 Accelerator Program",
-      description:
-        "A MEST sponsored accelerator program designed for budding businesses to grow and flourish in Ghana.",
-      status: "draft",
-      students: [
-        "0xF9e8D729c2724437209cDB24826b2a056B9fe84F",
-        "0xF9e8D729c2724437209cDB24826b2a056B9fe84F",
-        "0xF9e8D729c2724437209cDB24826b2a056B9fe84F",
-      ],
-    },
-  ];
+    if (account && account.address) {
+      getProgramsCreated(account.address).then(programs => {
+        setCreatedPrograms(programs);
+        return;
+      });
+    }
+  }, [account]);
 
   const subMenus = [
     { name: "programs", icon: "uil-books" },
     { name: "tokens", icon: "uil-transaction" },
     { name: "redeem", icon: "uil-transaction" },
   ];
-
-  // const [initialPrograms, setInitialPrograms] = useState([]);
 
   const taskTypes = [
     { id: 1, name: "assignment" },
@@ -86,7 +50,7 @@ const ProfileContent: React.FC = () => {
   ];
 
   const [subMenu, setSubMenu] = useState("programs");
-  const [programs, setPrograms] = useState(initialPrograms);
+  const [createdPrograms, setCreatedPrograms] = useState([]);
   const [activeProgram, setActiveProgram] = useState({
     id: 0,
     name: "",
@@ -96,39 +60,43 @@ const ProfileContent: React.FC = () => {
 
   const handleSubMenuClicked = (pageName: string) => {
     setSubMenu(pageName);
+    if (pageName === "programs" && account && account.address) {
+      getProgramsCreated(account.address).then(programs => {
+        setCreatedPrograms(programs);
+        return;
+      });
+    }
   };
 
   const handleProgramClicked = (programId: number) => {
-    const program = programs.find(p => p.id === programId);
-
-    if (program) {
-      setActiveProgram({
-        id: program.id,
-        name: program.name,
-        description: program.description,
-        status: program.status,
-      });
-    } else {
-      setActiveProgram({
-        id: 0,
-        name: "",
-        description: "",
-        status: "",
-      });
+    if (createdPrograms.length > 0) {
+      const program = createdPrograms.find(p => p.id === programId);
+      if (program) {
+        setActiveProgram({
+          id: program.id,
+          name: program.name,
+          description: program.description,
+          status: program.status,
+        });
+        setSubMenu("show program");
+      } else {
+        // Handle the case where no program with the given programId was found
+      }
     }
-    setSubMenu("show program");
   };
   const handleProgramsFilter = (filter: string) => {
-    if (filter === "all") return setPrograms(initialPrograms);
-
-    const filteredPrograms = initialPrograms.filter(item => item.status === filter);
-    return setPrograms(filteredPrograms);
+    console.log(filter);
+    // if (filter === "personal") return setPrograms(initialPrograms);
+    // if (filter === "others") return setPrograms(filteredPrograms);
+    // return setPrograms([]);
   };
 
   const handleResourceCreated = (type: string, blockHash: string) => {
     console.log(type);
     console.log(blockHash);
   };
+
+  // const account = useAccount();
 
   return (
     <section className="section mt-60">
@@ -141,7 +109,7 @@ const ProfileContent: React.FC = () => {
                 <div className="row mt-4">
                   <div className="col-6 text-center">
                     <i data-feather="book-open" className="fea icon-ex-md text-primary mb-1" />
-                    <h5 className="mb-0">0</h5>
+                    <h5 className="mb-0">{createdPrograms.length}</h5>
                     <p className="text-muted mb-0">Programs</p>
                   </div>
                   <div className="col-6 text-center">
@@ -207,7 +175,7 @@ const ProfileContent: React.FC = () => {
                 <div className="sidebar sticky-bar p-4 rounded shadow">
                   {subMenu === "programs" && (
                     <ProgramList
-                      programs={programs}
+                      programs={createdPrograms}
                       programClicked={handleProgramClicked}
                       handleFilter={handleProgramsFilter}
                     />

@@ -1,5 +1,5 @@
 import React from "react";
-import {formatTimestamp} from "~~/plugins/common";
+import { formatTimestamp } from "~~/plugins/common";
 
 interface Task {
   id: number;
@@ -18,9 +18,10 @@ interface TaskListProps {
   tasks: Task[];
   taskTypes: TaskType[];
   scoreStudents: () => void;
+  submitAssignment: () => void;
 }
 
-const TaskList: React.FC<TaskListProps> = ({ tasks, taskTypes, scoreStudents }) => {
+const TaskList: React.FC<TaskListProps> = ({ tasks, taskTypes, scoreStudents, submitAssignment }) => {
   const getRewardType = (typeId: number) => taskTypes.find(type => type.id === typeId)?.name;
 
   return (
@@ -57,11 +58,11 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, taskTypes, scoreStudents }) 
                     <a
                       onClick={event => {
                         event.preventDefault();
-                        scoreStudents();
+                        submitAssignment();
                       }}
                       className="btn btn-soft-success btn-sm"
                     >
-                      Submit Assignment
+                      Turn In
                     </a>
                   </div>
                 </div>

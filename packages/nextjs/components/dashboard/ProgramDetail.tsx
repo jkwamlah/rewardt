@@ -3,6 +3,8 @@ import NoContentAvailable from "~~/components/dashboard/NoContentAvailable";
 import StudentList from "~~/components/dashboard/StudentList";
 import TaskCreate from "~~/components/dashboard/TaskCreate";
 import TaskList from "~~/components/dashboard/TaskList";
+import TaskSubmit from "~~/components/dashboard/TaskSubmit";
+import { useScaffoldContractRead } from "~~/hooks/scaffold-eth/useScaffoldContractRead";
 
 interface Program {
   id: number;
@@ -70,6 +72,11 @@ const ProgramDetail: React.FC<ProgramDetailProps> = ({ program, students, taskTy
     setTaskButtonText("list tasks");
     setRewardStudents(shouldScoreStudents);
   };
+  const submitAssignment = () => {
+    setTitleText("submissions");
+    setShowTasks(!showTasks);
+    setTaskButtonText("Tasks");
+  };
 
   if (!program) return <NoContentAvailable />;
 
@@ -114,10 +121,19 @@ const ProgramDetail: React.FC<ProgramDetailProps> = ({ program, students, taskTy
             </div>
 
             {showTasks && titleText === "tasks" && (
-              <TaskList tasks={tasks} taskTypes={taskTypes} scoreStudents={() => scoreStudents(true)} />
+              <TaskList
+                tasks={tasks}
+                taskTypes={taskTypes}
+                scoreStudents={() => scoreStudents(true)}
+                submitAssignment={submitAssignment}
+              />
             )}
 
-            {!showTasks && titleText !== "students" && <TaskCreate programId={program.id} rewardTypes={taskTypes} />}
+            {titleText === "submissions" && <TaskSubmit programId={1} taskId={1}  criteria=""/>}
+
+
+            {!showTasks && !["submissions", "students"].includes(titleText) && <TaskCreate programId={program.id} rewardTypes={taskTypes} />}
+
 
             {rewardStudents && (
               <div className="col-md-12 mt-2">

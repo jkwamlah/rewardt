@@ -27,3 +27,5 @@ export function formatTimestamp(timestamp: number): string {
   // Combine and format the range
   return `${startTime} to ${endTime}`;
 }
+
+export const graphQLUrl = 'https://api.studio.thegraph.com/query/52639/rewardt-subgraph/0.0.1'

@@ -6,6 +6,7 @@ interface Program {
   name: string;
   description: string;
   status: string;
+  externalId: string;
 }
 
 interface ProgramListProps {
@@ -92,17 +93,19 @@ const ProgramList: React.FC<ProgramListProps> = ({ programs, programClicked, han
               <div className="mt-2">
                 <div className="mt-2 d-flex justify-content-between">
                   <span
-                    className={`badge text-bg-soft d-flex align-items-center text-capitalize ${getClassProgressStatus(
+                    className={`badge badge-sm text-bg-soft d-flex align-items-center text-capitalize ${getClassProgressStatus(
                       program.status,
                     )}`}
                   >
                     {program.status}
                   </span>
-                  {!["completed", "draft"].includes(program.status) && (
-                    <a href="" className="text-primary p-1 px-2 shadow rounded me-3">
-                      Join <i className="uil uil-angle-right-b" />
-                    </a>
-                  )}
+                  <span
+                    className={`badge badge-sm text-bg-soft d-flex align-items-center text-capitalize ${getClassProgressStatus(
+                      program.status,
+                    )}`}
+                  >
+                    {program.externalId}
+                  </span>
                 </div>
               </div>
             </div>

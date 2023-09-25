@@ -2572,12 +2572,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphprotocol/graph-cli@npm:^0.55.0":
-  version: 0.55.0
-  resolution: "@graphprotocol/graph-cli@npm:0.55.0"
+"@graphprotocol/graph-cli@npm:0.57.0":
+  version: 0.57.0
+  resolution: "@graphprotocol/graph-cli@npm:0.57.0"
   dependencies:
     "@float-capital/float-subgraph-uncrashable": ^0.0.0-alpha.4
     "@oclif/core": 2.8.6
+    "@oclif/plugin-autocomplete": ^2.3.6
+    "@oclif/plugin-not-found": ^2.4.0
     "@whatwg-node/fetch": ^0.8.4
     assemblyscript: 0.19.23
     binary-install-raw: 0.0.13
@@ -2604,16 +2606,25 @@ __metadata:
     yaml: 1.10.2
   bin:
     graph: bin/run
-  checksum: b46a53fd92910e13c93ad114b5f615fee81bedbbfda65bdb928c6720ff14f1a47035a7e2b78e9dfd7b9cbbeaf443e2c1d20a2d03b12cf373ab27b66346bfd43a
+  checksum: 9c0b20c75d35dbd5911b599bae2212697a0a791362a99a8962808d815792231b72ef859f33726f7240c2e7e5f0c8f0fc52dd7c5ad65dd62d2c28da9acde7f983
   languageName: node
   linkType: hard
 
-"@graphprotocol/graph-ts@npm:^0.31.0":
-  version: 0.31.0
-  resolution: "@graphprotocol/graph-ts@npm:0.31.0"
+"@graphprotocol/graph-ts@npm:0.30.0":
+  version: 0.30.0
+  resolution: "@graphprotocol/graph-ts@npm:0.30.0"
   dependencies:
     assemblyscript: 0.19.10
-  checksum: 20394b17d3241a662f0b2efebdc02f44e4e0814fdbb09b4cac0c84b84a173798325840bc1daf1d11ebaf27b1b3e13ff6e2766567c755cb77c1321ba1462fbecc
+  checksum: ec99741117c884161d644c83014418628358f0ed3e3d29c2ed59035c099db58c3d7d42718df45233f2c26724d8ae8d562af8a5b75f468cb16d5f4b04a7443121
+  languageName: node
+  linkType: hard
+
+"@graphprotocol/graph-ts@npm:^0.27.0":
+  version: 0.27.0
+  resolution: "@graphprotocol/graph-ts@npm:0.27.0"
+  dependencies:
+    assemblyscript: 0.19.10
+  checksum: d2916b9d0a8063ed3f00486012fd625301332fced8c9407f57908b43f0724d512c56b89b1c40e1cb67eca2ced9b1d437e237b04ab588b1d962573c301848a31a
   languageName: node
   linkType: hard
 
@@ -3551,6 +3562,64 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@oclif/core@npm:^2.15.0":
+  version: 2.15.0
+  resolution: "@oclif/core@npm:2.15.0"
+  dependencies:
+    "@types/cli-progress": ^3.11.0
+    ansi-escapes: ^4.3.2
+    ansi-styles: ^4.3.0
+    cardinal: ^2.1.1
+    chalk: ^4.1.2
+    clean-stack: ^3.0.1
+    cli-progress: ^3.12.0
+    debug: ^4.3.4
+    ejs: ^3.1.8
+    get-package-type: ^0.1.0
+    globby: ^11.1.0
+    hyperlinker: ^1.0.0
+    indent-string: ^4.0.0
+    is-wsl: ^2.2.0
+    js-yaml: ^3.14.1
+    natural-orderby: ^2.0.3
+    object-treeify: ^1.1.33
+    password-prompt: ^1.1.2
+    slice-ansi: ^4.0.0
+    string-width: ^4.2.3
+    strip-ansi: ^6.0.1
+    supports-color: ^8.1.1
+    supports-hyperlinks: ^2.2.0
+    ts-node: ^10.9.1
+    tslib: ^2.5.0
+    widest-line: ^3.1.0
+    wordwrap: ^1.0.0
+    wrap-ansi: ^7.0.0
+  checksum: a4ef8ad00d9bc7cb48e5847bad7def6947f913875f4b0ecec65ab423a3c2a82c87df173c709c3c25396d545f60d20d17d562c474f66230d76de43061ce22ba90
+  languageName: node
+  linkType: hard
+
+"@oclif/plugin-autocomplete@npm:^2.3.6":
+  version: 2.3.8
+  resolution: "@oclif/plugin-autocomplete@npm:2.3.8"
+  dependencies:
+    "@oclif/core": ^2.15.0
+    chalk: ^4.1.0
+    debug: ^4.3.4
+  checksum: 5c15ae7ac2304b8ab09a6c13e9aca52435c7639648e3bb8f6fa5d38987b07e33b4aab850ce61242c50d41cf80510ac93643da0dde6807b629b43d1ea808fba68
+  languageName: node
+  linkType: hard
+
+"@oclif/plugin-not-found@npm:^2.4.0":
+  version: 2.4.1
+  resolution: "@oclif/plugin-not-found@npm:2.4.1"
+  dependencies:
+    "@oclif/core": ^2.15.0
+    chalk: ^4
+    fast-levenshtein: ^3.0.0
+  checksum: 7be4e98aeec1cb5127c3bc3c9c89747374c128e677f5457b53972d3abac579b385efdc10fed610345ef792ba9506ac98fa2fb706627e6728a197da276797df1d
+  languageName: node
+  linkType: hard
+
 "@openzeppelin/contracts@npm:^4.8.1":
   version: 4.9.3
   resolution: "@openzeppelin/contracts@npm:4.9.3"
@@ -3991,17 +4060,6 @@ __metadata:
     vercel: ^28.15.1
     wagmi: ^0.12.15
     zustand: ^4.1.2
-  languageName: unknown
-  linkType: soft
-
-"@se-2/subgraph@workspace:packages/subgraph":
-  version: 0.0.0-use.local
-  resolution: "@se-2/subgraph@workspace:packages/subgraph"
-  dependencies:
-    "@graphprotocol/graph-cli": ^0.55.0
-    "@graphprotocol/graph-ts": ^0.31.0
-    ts-node: ^10.9.1
-    typescript: ^5.0.4
   languageName: unknown
   linkType: soft
 
@@ -6647,7 +6705,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"assemblyscript@npm:0.19.23":
+"assemblyscript@npm:0.19.23, assemblyscript@npm:^0.19.20":
   version: 0.19.23
   resolution: "assemblyscript@npm:0.19.23"
   dependencies:
@@ -7528,7 +7586,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:4.1.2, chalk@npm:^4.0.0, chalk@npm:^4.0.2, chalk@npm:^4.1.0, chalk@npm:^4.1.1, chalk@npm:^4.1.2":
+"chalk@npm:4.1.2, chalk@npm:^4, chalk@npm:^4.0.0, chalk@npm:^4.0.2, chalk@npm:^4.1.0, chalk@npm:^4.1.1, chalk@npm:^4.1.2":
   version: 4.1.2
   resolution: "chalk@npm:4.1.2"
   dependencies:
@@ -10526,6 +10584,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fast-levenshtein@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "fast-levenshtein@npm:3.0.0"
+  dependencies:
+    fastest-levenshtein: ^1.0.7
+  checksum: 02732ba6c656797ca7e987c25f3e53718c8fcc39a4bfab46def78eef7a8729eb629632d4a7eca4c27a33e10deabffa9984839557e18a96e91ecf7ccaeedb9890
+  languageName: node
+  linkType: hard
+
 "fast-querystring@npm:^1.1.1":
   version: 1.1.2
   resolution: "fast-querystring@npm:1.1.2"
@@ -10562,6 +10629,13 @@ __metadata:
   dependencies:
     punycode: ^1.3.2
   checksum: 5043d0c4a8d775ff58504d56c096563c11b113e4cb8a2668c6f824a1cd4fb3812e2fdf76537eb24a7ce4ae7def6bd9747da630c617cf2a4b6ce0c42514e4f21c
+  languageName: node
+  linkType: hard
+
+"fastest-levenshtein@npm:^1.0.7":
+  version: 1.0.16
+  resolution: "fastest-levenshtein@npm:1.0.16"
+  checksum: a78d44285c9e2ae2c25f3ef0f8a73f332c1247b7ea7fb4a191e6bb51aa6ee1ef0dfb3ed113616dcdc7023e18e35a8db41f61c8d88988e877cf510df8edafbc71
   languageName: node
   linkType: hard
 
@@ -13953,6 +14027,17 @@ __metadata:
   version: 1.2.6
   resolution: "match-all@npm:1.2.6"
   checksum: 3d4f16b8fd082f2fd10e362f4a8b71c62f8a767591b3db831ca2bdcf726337e9a64e4abc30e2ef053dc2bcfb875a9ed80bd78e006ad5ef11380a7158d0cb00e1
+  languageName: node
+  linkType: hard
+
+"matchstick-as@npm:0.5.0":
+  version: 0.5.0
+  resolution: "matchstick-as@npm:0.5.0"
+  dependencies:
+    "@graphprotocol/graph-ts": ^0.27.0
+    assemblyscript: ^0.19.20
+    wabt: 1.0.24
+  checksum: 299c66c3990dc0379d7172ddad6878e657b2e23ab39ff98eab315f3a55144882d3f3911ab6135ff2725293835acea17ec83fe169459d157ecacfc6f41d15b6cc
   languageName: node
   linkType: hard
 
@@ -17544,6 +17629,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rewardt-subgraph@workspace:packages/rewardt-subgraph":
+  version: 0.0.0-use.local
+  resolution: "rewardt-subgraph@workspace:packages/rewardt-subgraph"
+  dependencies:
+    "@graphprotocol/graph-cli": 0.57.0
+    "@graphprotocol/graph-ts": 0.30.0
+    matchstick-as: 0.5.0
+  languageName: unknown
+  linkType: soft
+
 "rfdc@npm:^1.3.0":
   version: 1.3.0
   resolution: "rfdc@npm:1.3.0"
@@ -19532,16 +19627,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.0.4":
-  version: 5.2.2
-  resolution: "typescript@npm:5.2.2"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 7912821dac4d962d315c36800fe387cdc0a6298dba7ec171b350b4a6e988b51d7b8f051317786db1094bd7431d526b648aba7da8236607febb26cf5b871d2d3c
-  languageName: node
-  linkType: hard
-
 "typescript@patch:typescript@4.3.4#~builtin<compat/typescript>":
   version: 4.3.4
   resolution: "typescript@patch:typescript@npm%3A4.3.4#~builtin<compat/typescript>::version=4.3.4&hash=a1c5e5"
@@ -19559,16 +19644,6 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 2eee5c37cad4390385db5db5a8e81470e42e8f1401b0358d7390095d6f681b410f2c4a0c496c6ff9ebd775423c7785cdace7bcdad76c7bee283df3d9718c0f20
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@^5.0.4#~builtin<compat/typescript>":
-  version: 5.2.2
-  resolution: "typescript@patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=a1c5e5"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 07106822b4305de3f22835cbba949a2b35451cad50888759b6818421290ff95d522b38ef7919e70fb381c5fe9c1c643d7dea22c8b31652a717ddbd57b7f4d554
   languageName: node
   linkType: hard
 
@@ -20160,6 +20235,23 @@ __metadata:
   bin:
     vm2: bin/vm2
   checksum: fc6cf553134145cd7bb5246985bf242b056e3fb5ea71e2eef6710b2a5d6c6119cc6bc960435ff62480ee82efb43369be8f4db07b6690916ae7d3b2e714f395d8
+  languageName: node
+  linkType: hard
+
+"wabt@npm:1.0.24":
+  version: 1.0.24
+  resolution: "wabt@npm:1.0.24"
+  bin:
+    wasm-decompile: bin/wasm-decompile
+    wasm-interp: bin/wasm-interp
+    wasm-objdump: bin/wasm-objdump
+    wasm-opcodecnt: bin/wasm-opcodecnt
+    wasm-strip: bin/wasm-strip
+    wasm-validate: bin/wasm-validate
+    wasm2c: bin/wasm2c
+    wasm2wat: bin/wasm2wat
+    wat2wasm: bin/wat2wasm
+  checksum: 7d404acaa0605b5cde99585839b97db37998754512d89e1c63147bc62f4bfd46484595cc8f2e8d6f9741f67206ed936336a0828a3e1e6f3d348567cda6176333
   languageName: node
   linkType: hard
 
