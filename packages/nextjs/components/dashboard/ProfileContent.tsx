@@ -80,9 +80,9 @@ const ProfileContent: React.FC = () => {
     { id: 2, name: "kwami sefa", address: "0xe9aaD729c2724437209cDB24826b2a056B9fe84F", tokens: 200 },
     { id: 3, name: "angel yaw", address: "0xd78e8D729c2724437200cDB24826b2a056B9fe84F", tokens: 900 },
     { id: 4, name: "princess tyra", address: "0x099e8D729c2724437209cDB24826b2a056B9fe84F", tokens: 0 },
-    { id: 3, name: "wendy shay", address: "0xc78e8D729c2724437200cDB24826b2a056B9fe84F", tokens: 900 },
-    { id: 4, name: "gina fino", address: "0xad9e8D729c2724437209cDB24826b2a056B9fe84F", tokens: 0 },
-    { id: 5, name: "baba raman", address: "0xea6e8D729c2724437209cDB24826b2a056B9fe84F", tokens: 800 },
+    { id: 5, name: "wendy shay", address: "0xc78e8D729c2724437200cDB24826b2a056B9fe84F", tokens: 900 },
+    { id: 6, name: "gina fino", address: "0xad9e8D729c2724437209cDB24826b2a056B9fe84F", tokens: 0 },
+    { id: 7, name: "baba raman", address: "0xea6e8D729c2724437209cDB24826b2a056B9fe84F", tokens: 800 },
   ];
 
   const [subMenu, setSubMenu] = useState("programs");
