@@ -34,28 +34,28 @@ const tasks = [
     name: "Digital Conference Event Intro",
     typeId: 1,
     criteria: "Hall 3, Sinchang-dong, Kwangju, South Korea",
-    timestamp: "10:30AM to 11:15AM",
+    timestamp: 1695607883,
   },
   {
     id: 2,
     name: "Conference On User Interface",
     typeId: 1,
     criteria: "Hall 3, Sinchang-dong, Kwangju, South Korea",
-    timestamp: "10:30AM to 11:15AM",
+    timestamp: 1695607883,
   },
   {
     id: 3,
     name: "Business World Event Intro",
     typeId: 1,
     criteria: "Hall 3, Sinchang-dong, Kwangju, South Korea",
-    timestamp: "10:30AM to 11:15AM",
+    timestamp: 1695607883,
   },
   {
-    id: 3,
+    id: 4,
     name: "Business Conference for all",
     typeId: 1,
     criteria: "Hall 3, Sinchang-dong, Kwangju, South Korea",
-    timestamp: "10:30AM to 11:15AM",
+    timestamp: 1695607883,
   },
 ];
 
@@ -117,11 +117,11 @@ const ProgramDetail: React.FC<ProgramDetailProps> = ({ program, students, taskTy
               <TaskList tasks={tasks} taskTypes={taskTypes} scoreStudents={() => scoreStudents(true)} />
             )}
 
-            {!showTasks && titleText !== "students" && <TaskCreate rewardTypes={taskTypes} />}
+            {!showTasks && titleText !== "students" && <TaskCreate programId={program.id} rewardTypes={taskTypes} />}
 
             {rewardStudents && (
               <div className="col-md-12 mt-2">
-                <StudentList students={students} sendToken={false} />
+                <StudentList programId={1} taskId={1} students={students} sendToken={true} />
               </div>
             )}
           </div>

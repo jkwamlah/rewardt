@@ -217,7 +217,7 @@ const ProfileContent: React.FC = () => {
 
                   {subMenu === "create program" && <ProgramCreate />}
                   {subMenu === "join program" && <ProgramJoin resourceCreated={handleResourceCreated} />}
-                  {subMenu === "create reward" && <TaskCreate rewardTypes={taskTypes} />}
+                  {subMenu === "create reward" && <TaskCreate programId={1} rewardTypes={taskTypes} />}
 
                   {subMenu === "show program" && (
                     <ProgramDetail students={students} taskTypes={taskTypes} program={activeProgram} />

@@ -1,11 +1,12 @@
 import React from "react";
+import {formatTimestamp} from "~~/plugins/common";
 
 interface Task {
   id: number;
   name: string;
   typeId: number;
   criteria: string;
-  timestamp: string;
+  timestamp: number;
 }
 
 interface TaskType {
@@ -36,7 +37,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, taskTypes, scoreStudents }) 
                   <p className="text-muted location-time">
                     <span className="text-dark h6">Criteria:</span> {task.criteria}
                     <br />
-                    <span className="text-dark h6">Time:</span> {task.timestamp}
+                    <span className="text-dark h6">Time:</span> {formatTimestamp(task.timestamp)}
                     <br />
                     <div className="text-dark h6">
                       Type:

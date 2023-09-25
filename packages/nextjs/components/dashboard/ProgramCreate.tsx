@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import feather from "feather-icons";
 import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
-import getErrorMessage from "~~/plugins/errorMessage";
+import { getErrorMessage } from "~~/plugins/common";
 
 const ProgramCreate = () => {
   useEffect(() => {
@@ -32,7 +32,6 @@ const ProgramCreate = () => {
     args: [formData.externalId, formData.name, formData.description],
     mode: undefined,
     onBlockConfirmation: txnReceipt => {
-      console.log("📦 Transaction blockHash", txnReceipt.blockHash);
       setAlertType("info");
       setShowAlert(true);
       setAlertMessage(`Program created with blockHash ${txnReceipt.blockHash}`);
@@ -42,7 +41,6 @@ const ProgramCreate = () => {
       setLoader(false);
       setAlertType("danger");
       setShowAlert(true);
-      console.log("data", error.message);
       const message = getErrorMessage(error.message);
       message ? setAlertMessage(message) : setAlertMessage("An error occurred.");
     },
@@ -55,6 +53,8 @@ const ProgramCreate = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setLoader(true);
+
     await contract.writeAsync({
       args: [formData.externalId, formData.name, formData.description],
       value: undefined,
@@ -67,11 +67,11 @@ const ProgramCreate = () => {
     <div className="col-lg-12 mt-3">
       {showAlert && (
         <div
-          className={`alert alert-dismissible fade show text-capitalize bg-soft-primary
+          className={`d-flex align-items-center alert alert-dismissible fade show text-capitalize bg-soft-primary
          ${alertType === "info" ? "bg-soft-primary" : "bg-soft-danger"}'`}
           role="alert"
         >
-          {alertMessage}
+          <span> {alertMessage}</span>
           <button
             onClick={() => setShowAlert(false)}
             type="button"
